@@ -1,0 +1,3 @@
+# outline
+
+* database and software
