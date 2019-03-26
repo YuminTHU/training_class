@@ -42,4 +42,36 @@ P-site directory, including :
 
 每一行代表不同长度的 Ribo-se0q 测序片段的直方图。例如在 29nt 长度的 Ribo-seq 片段中，我们可以明显的看到10950在0 距离为 13nt 的位点含有一个峰值(peak)。鉴于大部分核糖体会在翻译起始位点21000停滞较多的时间，因此对于 29nt 长的 Ribo-seq片段，其 P-site 位点的定义应该4代06500表直方图中绝大多数的核糖体，因此我们将 P-site 位点应该定义为峰值最高的第 13 个碱基(13nt)的位置。
 
-#### 2.Generating P-site track
+#### 2. Generating P-site track
+This step creats the P-site track for transcripts of interests using determined P-sites position from previous step.
+look at transcripts from chromosome X :
+```
+scripts/create_track_Ribo.sh -i GSE52799/SRR1039770.sort.bam -G annotation_fly/X.exons.gtf -g annotation_fly/genome -P GSE52799/P-site/SRR1039770.psite1nt.txt -o GSE52799 -n SRR1039770 -s scripts;
+```
+##### input files
+1. <Ribo_bam>
+2. <exons.gtf> : a gtf file for only the exons from transcripts of interest, eg: X.exons.gtf
+3. <genome> : the file including all the chromosomes and its genome size. Noted: genome can be obtained by using samtools faidx function with the input of fasta file. genome may look like this:
+  ```
+  2L	23513712
+  2R	25286936
+  3L	28110227
+  3R	32079331 
+  ```
+4. P-site:
+<P-site_position> : the file listing the P-site position for each read length. This file can be found in the output of     previous step, eg: name.psite1nt.txt
+5. <out_dir> : the directory of the output result, eg: GSE52799
+6. <study_name> : the name of all the output file, default: test. eg: SRR1039770
+7. <scripts_dir> : the directory of all the scripts in the package
+    
+##### output files
+1. bedgraph/name directory, including :
+final.psite : P-site track at transcriptome wide. It may look like this :
+```
+FBtr0070533	0,0,0,0,0,0,0,0,0,0,0,0,6,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1,0,0,0,0,1,0,2,1,0,0,0,0,0,0,4,8,0,0,3,0,5,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBtr0073886	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBtr0070604	0,0,0,0,0,0,0,0,0,0,0,0,59,6,0,1,0,0,2,6,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBtr0070603	0,0,0,0,0,0,0,0,0,0,0,0,75,2,7,10,7,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,3,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+```
+
+  
