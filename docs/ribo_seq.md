@@ -74,4 +74,73 @@ FBtr0070604	0,0,0,0,0,0,0,0,0,0,0,0,59,6,0,1,0,0,2,6,1,0,1,0,0,0,0,0,0,0,0,0,0,0
 FBtr0070603	0,0,0,0,0,0,0,0,0,0,0,0,75,2,7,10,7,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,3,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 ```
 
+### Main function
+#### 3. RiboWave
+This step can achieve multiple functions :
+
+1. denoising [denoise]
+2. providing predicted p.value for each given ORF to identify its translation status [pvalue,-P]
+3. providing reads density (P-site/PF P-site) for each given ORF [density,-D]
+4. providing translation efficiency (TE) estimation for each given ORF [TE,-T]
+5. providing frameshift potential (CRF score) for each given ORF [CRF,-F]
+
+It might take hours to perform the analysis if the input is large. It is recommended to specify the number of CPU cores through the -p option.
+
+Run Ribowave on example:
+#### Denoise the P-site track
+```
+mkdir -p Ribowave;
+scripts/Ribowave  -a GSE52799/bedgraph/SRR1039770/final.psite -b annotation_fly/final.ORFs -o GSE52799/Ribowave -n SRR1039770 -s scripts -p 8;
+```
+#### Identifying translated ORF
+```
+mkdir -p Ribowave;
+scripts/Ribowave -P -a GSE52799/bedgraph/SRR1039770/final.psite -b annotation_fly/final.ORFs -o GSE52799/Ribowave -n SRR1039770 -s scripts -p 8;
+```
+#### Estimating abundance
+```
+mkdir -p Ribowave;
+scripts/Ribowave -D -a GSE52799/bedgraph/SRR1039770/final.psite -b annotation_fly/final.ORFs -o GSE52799/Ribowave -n SRR1039770 -s scripts -p 8;
+```
+#### Estimating TE
+IMPORTANT : when estimating TE, user should input the sequenced depth of Ribo-seq and the FPKM value from paired RNA-seq
+```
+mkdir -p Ribowave;
+scripts/Ribowave -T 9012445  GSE52799/mRNA/SRR1039761.RPKM -a GSE52799/bedgraph/SRR1039770/final.psite -b annotation_fly/final.ORFs -o GSE52799/Ribowave -n SRR1039770 -s scripts -p 8;
+```
+#### Calculating frameshift potential
+on annotated ORFs
+```
+mkdir -p Ribowave;
+awk -F '\t' '$3=="anno"'  annotation_fly/final.ORFs  >   annotation_fly/aORF.ORFs;
+scripts/Ribowave -F -a GSE52799/bedgraph/SRR1039770/final.psite -b annotation_fly/aORF.ORFs -o GSE52799/Ribowave -n SRR1039770 -s scripts -p 8;
+```
+#### Multiple functions
+```
+mkdir -p Ribowave;
+scripts/Ribowave -PD -T 9012445  GSE52799/mRNA/SRR1039761.RPKM -a GSE52799/bedgraph/SRR1039770/final.psite -b annotation_fly/final.ORFs -o GSE52799/Ribowave -n SRR1039770 -s scripts -p 8;
+```
+
+##### input files
+1. bedgraph/name:
+<P-site track> : output from the previous step, containing the P-site track of transcripts of interest, eg: final.psite
+2. <ORF_list> : ORFs of interest ,eg : final.ORFs. It is generated in the step of create_annotation.sh
+3. <Ribo-seq sequenced depth> : the sequenced depth of Ribo-seq to calculate FPKM , eg: 9012445
+4. <RNA FPKM> : FPKM table. It may look like this :
   
+```
+ FBtr0100871	22262
+ FBtr0070604	18682
+ FBtr0100231	14746.5
+ FBtr0100874	14024.5
+ FBtr0100864	11475.6
+```
+
+##### output files
+1. name.PF_psite	: the denoised signal track(PF P-sites signal track) at transcriptome wide. It looks similar as the input final psite.
+2.  including chi-square P-value information. It may look like this :
+Column	
+
+
+
+
