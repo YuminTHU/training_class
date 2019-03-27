@@ -139,7 +139,12 @@ scripts/Ribowave -PD -T 9012445  GSE52799/mRNA/SRR1039761.RPKM -a GSE52799/bedgr
 ##### output files
 1. name.PF_psite	: the denoised signal track(PF P-sites signal track) at transcriptome wide. It looks similar as the input final psite.
 2.  including chi-square P-value information. It may look like this :
-Column	
+```
+column1-4: basic information about the ORF
+column5: reads coverage within the ORF
+column6: P-value predicted by RiboWave
+column7: Values estimating the relative abundance of PF P-sites outside of the studied ORF
+column8: Reads intensity at the current start codon
 
 
 
