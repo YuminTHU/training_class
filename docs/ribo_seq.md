@@ -138,14 +138,43 @@ scripts/Ribowave -PD -T 9012445  GSE52799/mRNA/SRR1039761.RPKM -a GSE52799/bedgr
 
 ##### output files
 1. name.PF_psite	: the denoised signal track(PF P-sites signal track) at transcriptome wide. It looks similar as the input final psite.
-2.  including chi-square P-value information. It may look like this :
+2. including chi-square P-value information. It may look like this :
 ```
 column1-4: basic information about the ORF
 column5: reads coverage within the ORF
 column6: P-value predicted by RiboWave
 column7: Values estimating the relative abundance of PF P-sites outside of the studied ORF
 column8: Reads intensity at the current start codon
-
+```
+result directory, including :
+3. name.95%.mx : RiboWave makes the prediction on the translation initiation sites and gives the final translated product output (p.value < 0.05) . It may look like this :
+```
+FBtr0070007_2_93_1028
+FBtr0070008_1_128_943
+FBtr0070025_2_135_1094
+```
+4. name.density	: reads density ( PF P-site ) of given ORFs. It may look like this :
+```
+column1-4: basic information about the ORF
+column5: number of PF P-sites in transcript
+column6: number of PF P-sites in given ORF
+column7: density of PF P-sites in given ORF
+```
+5. name.TE : TE of given ORFs. It may look like this :
+```
+column1: transcript
+column2: ORF
+column3: TE
+```
+6. name.CRF.final : ORFs that might experience reading frame translocation. It may look like this :
+```
+column1: ORF
+column2: start of frameshift
+column3: stop of frameshift
+column4: PF P-sites' reading frames after the change point ,eg: 2_2,0_1 where 2_2 refers to continuous two PF P-sites of frame 2 followed by continuous one PF P-sites of frame 0.
+column5: Relative position of PF P-sites after the shift ,eg : 1413,1440;1789 where 1413,1440 corresponds to the exact position of 2_2 within the transcript. Discontinuity in the reading frame is separated by ;
+column6: CRF score describing the potential of frameshift
+```
 
 
 
