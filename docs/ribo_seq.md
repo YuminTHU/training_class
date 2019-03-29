@@ -7,6 +7,7 @@ Ribo-seq是2009年Weissman课题组首次发表的研究细胞内蛋白翻译图
 图1
 
 ## 数据处理
+download scripts from https://github.com/lulab/Ribowave
 ### Requirements
 #### software: 
 R, bedtools v2.25.0
