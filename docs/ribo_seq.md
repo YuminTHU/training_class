@@ -53,12 +53,13 @@ P-site directory, including :
 ```
 2. name.psite.pdf : the PDF displaying the histogram of aggregated reads
 我们收集了所有已被注释的起始密码子并将 这些起始密码子和Ribo-seq 比对上的序列进行重合，分别计算Ribo-seq序列的5’端偏离起始密码子的第一个碱基A的距离(offset)。根据 Ribo-seq测序片段长度的不同，我们进一步将Ribo-seq片段分成多个组分。在每个长度对应的组分里，作出Ribo-seq片段5’端偏离起始密码子A的距离(offset)的直方图。
-
 ![](../assets/Ribo_seq.F2.SRR1039770.psite.png)
 
 每一行代表不同长度的 Ribo-seq 测序片段的直方图。该数据中，30nt的reads数目最多，在30nt长度的Ribo-seq片段中，我们可以明显的看到在距离为13nt的位点含有一个峰值(peak)。鉴于大部分核糖体会在翻译起始位点停滞较多的时间，因此对于30nt长的Ribo-seq片段，其P-site位点的定义应该代表直方图中绝大多数的核糖体，因此我们将P-site位点应该定义为峰值最高的第13个碱基(13nt)的位置。
 
 #### 2. Generating P-site track
+基于Ribo-seq序列及其确定的P-site位点，将规律推广到所有Ribo-seq的片段中，直接根据Ribo-seq序列的长度推断其对应的P-site位点。根据这种方法，我们可以将每一条转录本上所有的Ribo-seq片段转化为对应的P-site位点的信号点并获得转录组水平的Ribo-seq信号轨迹（signal track）。由于是由P-site位点定义出的信号轨迹，通常也被叫做P-site信号轨迹（P-sites track）。转录本上每一个位点的信号丰度代表了有多少Ribo-seq片段对应的P-site位点落在该位置上。此外参考已发表的文章，对于样本重复和生物重复（replicates）的数据，我们在转录本层面将P-site信号轨迹进行叠加而生成最终的P-site信号轨迹。
+
 This step creats the P-site track for transcripts of interests using determined P-sites position from previous step.
 look at transcripts from chromosome X :
 ```
