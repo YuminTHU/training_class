@@ -195,7 +195,8 @@ meme -dna -maxsize 1000000 \
   interested_promoter.fa
 ```
 output
-  
+![](../assets/sequence_meme.png)
+
 ##### 6.2 motif enrichment with ame
 1. download known motif from meme
 2. add de novo motif file by meme
