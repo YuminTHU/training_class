@@ -54,7 +54,7 @@ P-site directory, including :
 2. name.psite.pdf : the PDF displaying the histogram of aggregated reads
 我们收集了所有已被注释的起始密码子并将 这些起始密码子和Ribo-seq 比对上的序列进行重合，分别计算Ribo-seq序列的5’端偏离起始密码子的第一个碱基A的距离(offset)。根据 Ribo-seq测序片段长度的不同，我们进一步将Ribo-seq片段分成多个组分。在每个长度对应的组分里，作出Ribo-seq片段5’端偏离起始密码子A的距离(offset)的直方图。
 
-![](../assets/Ribo_seq.F2.png)
+![](../assets/Ribo_seq.F2.SRR1039770.psite.png)
 
 每一行代表不同长度的 Ribo-seq 测序片段的直方图。该数据中，30nt的reads数目最多，在30nt长度的Ribo-seq片段中，我们可以明显的看到在距离为13nt的位点含有一个峰值(peak)。鉴于大部分核糖体会在翻译起始位点停滞较多的时间，因此对于30nt长的Ribo-seq片段，其P-site位点的定义应该代表直方图中绝大多数的核糖体，因此我们将P-site位点应该定义为峰值最高的第13个碱基(13nt)的位置。
 
@@ -97,10 +97,23 @@ FBtr0070603	0,0,0,0,0,0,0,0,0,0,0,0,75,2,7,10,7,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 This step can achieve multiple functions :
 
 1. denoising [denoise]
+
+降噪:在降噪过程运用了小波变换来去除原始信号中非3-nt周期性的信号使得保留的信号均具有翻译的3-nt周期性，即PF P-site信号轨迹。
+
 2. providing predicted p.value for each given ORF to identify its translation status [pvalue,-P]
+
+鉴定ORF的翻译潜能：根据该转录本上经降噪后的P-sites是否富集在该ORF所在的阅读框内，判断ORF的翻译潜能。P<0.05即具有翻译活性。
 3. providing reads density (P-site/PF P-site) for each given ORF [density,-D]
+
+reads density = ORF上reads数/ORF长度，反映翻译水平的abundance。
+
 4. providing translation efficiency (TE) estimation for each given ORF [TE,-T]
+
+TE = 翻译水平的abundance/转录水平的abundance，反映翻译效率。
+
 5. providing frameshift potential (CRF score) for each given ORF [CRF,-F]
+
+鉴定潜在核糖体移码现象。
 
 It might take hours to perform the analysis if the input is large. It is recommended to specify the number of CPU cores through the -p option.
 
