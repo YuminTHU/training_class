@@ -214,6 +214,6 @@ ame --control interested_promoter.control \
   promoter_de_novo/meme.txt
 ```
 example output
-
+![](../assets/sequence_ame.png)
 
 
