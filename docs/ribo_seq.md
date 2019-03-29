@@ -1,4 +1,15 @@
-### pro-processing
+## 背景介绍
+### Ribo-seq原理
+Ribo-seq是2009年Weissman课题组首次发表的研究细胞内蛋白翻译图谱的新型二代测序技术，用来描述全基因组水平蛋白质的翻译情况。主要是选择性捕捉80S核糖体及其结合的RNA片段而定位核糖体所位于的RNA的位置。具体步骤为：在细胞裂解物中富集多聚核糖体（polysome）；将多聚核糖体用核酸酶（RNA nuclease）消化成单核糖体（monosome）；选择性的收集和富集80S核糖体并经纯化得到80S核糖体所保护的RNA片段。在此过程中，将80S核糖体保护的RNA片段进行下一步构建文库和测序（图1）。最后，通过生物信息学的分析获得细胞当前状态下的翻译图谱 。Ribo-seq数据测得的RNA片段长短与small RNA-seq相似。Ribo-seq测序的RNA片段长度大约分布在25~35nt区间。然而，由于Ribo-seq是特异性描述细胞的翻译组，因此其数据的测序片段大多比对到基因组的CDS区域（coding region）。此外，Ribo-seq还有一个明显区别于其他RNA-seq的特点，即Ribo-seq的序列在CDS区域往往呈现3-nt的周期性（图1）。这主要依赖于翻译过程中核糖体通常以3-nt的频率进行移动。
+
+## 数据处理
+### Requirements
+#### software: 
+R, bedtools v2.25.0
+#### R packages: 
+reshape, ggplot2, rhdf5, methods, wmtsa, parallel
+
+### Pro-processing
 #### 0. create annotation
 ```
 scripts/create_annotation.sh -G annotation_fly/dmel-all-r6.18.gtf -f annotation_fly/dmel-all-chromosome-r6.18.fasta  -o annotation_fly  -s scripts;
