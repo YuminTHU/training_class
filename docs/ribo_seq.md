@@ -99,18 +99,15 @@ This step can achieve multiple functions :
 1. denoising [denoise]
 
 降噪:在降噪过程运用了小波变换来去除原始信号中非3-nt周期性的信号使得保留的信号均具有翻译的3-nt周期性，即PF P-site信号轨迹。
-
 2. providing predicted p.value for each given ORF to identify its translation status [pvalue,-P]
 
 鉴定ORF的翻译潜能：根据该转录本上经降噪后的P-sites是否富集在该ORF所在的阅读框内，判断ORF的翻译潜能。P<0.05即具有翻译活性。
 3. providing reads density (P-site/PF P-site) for each given ORF [density,-D]
 
 reads density = ORF上reads数/ORF长度，反映翻译水平的abundance。
-
 4. providing translation efficiency (TE) estimation for each given ORF [TE,-T]
 
 TE = 翻译水平的abundance/转录水平的abundance，反映翻译效率。
-
 5. providing frameshift potential (CRF score) for each given ORF [CRF,-F]
 
 鉴定潜在核糖体移码现象。
