@@ -14,7 +14,7 @@ R, bedtools v2.25.0
 #### R packages: 
 reshape, ggplot2, rhdf5, methods, wmtsa, parallel
 
-### Pro-processing
+### Pre-processing
 #### 0. create annotation
 ```
 scripts/create_annotation.sh -G annotation_fly/dmel-all-r6.18.gtf -f annotation_fly/dmel-all-chromosome-r6.18.fasta  -o annotation_fly  -s scripts;
