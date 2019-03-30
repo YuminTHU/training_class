@@ -72,7 +72,7 @@ scripts/create_track_Ribo.sh -i GSE52799/SRR1039770.sort.bam -G annotation_fly/X
 ##### input files
 1. <Ribo_bam>
 2. <exons.gtf> : a gtf file for only the exons from transcripts of interest, eg: X.exons.gtf
-3. <genome> : the file including all the chromosomes and its genome size. Noted: genome can be obtained by using samtools faidx function with the input of fasta file. genome may look like this:
+3. <chromosome_size> : the file including all the chromosomes and its genome size. Noted: genome can be obtained by using samtools faidx function with the input of fasta file. genome may look like this:
   ```
   2L	23513712
   2R	25286936
