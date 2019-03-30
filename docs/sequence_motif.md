@@ -218,4 +218,4 @@ ame --control interested_promoter.control \
 example output
 ![](../assets/sequence_ame.png)
 
-
+download the example input files from [sequence_motif](https://github.com/YuminTHU/training_class/tree/master/files/sequence_motif) 
