@@ -1,4 +1,6 @@
 ### sequence motif analysis
+#### workflow
+![](../assets/seq_motif.pipeline.png)
 #### 1. get UTR or promoter sequence
 ##### 1.1 install R package GenomicFeatures and biozhuoer tools (cnode)
 GenomicFeatures package used to extract needed sequence
@@ -186,7 +188,7 @@ bedtools shuffle -i interested_promoter.bed \
 repeat get promoter and get 3'UTR section
 
 #### 6. motif enrichment
-##### 6.1 de novo find enriched motifs
+##### 6.1 de novo motif discovery
 ```
 meme -dna -maxsize 1000000 \
   -minw 4 -maxw 12 \
@@ -198,7 +200,7 @@ output
 
 ![](../assets/sequence_meme.png)
 
-##### 6.2 motif enrichment with ame
+##### 6.2 known motif enrichment
 1. download known motif from meme
 2. add de novo motif file by meme
 for 3'UTR
