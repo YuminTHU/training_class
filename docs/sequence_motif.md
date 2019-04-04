@@ -153,7 +153,7 @@ fasta-shuffle-letters interested_three_prime_UTR.fa interested_three_prime_UTR.c
 fasta-shuffle-letters interested_promoter.fa interested_promoter.control
 ```
 ##### 5.2 downstream 1000bp as bg
-https://dongzhuoer.github.io/diff_exp_2018_zhuoer/motif.html
+https://github.com/dongzhuoer/lulab-rotation-summary/blob/master/RNA-seq/motif-enrich.md
 ```
 slide <- function(input_bed, output_bed, n = 1000) {
     col_names <- c('chr', 'start', 'end', 'name', 'score', 'strand');
