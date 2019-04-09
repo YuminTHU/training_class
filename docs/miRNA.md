@@ -1,19 +1,26 @@
 ### miRNA target analysis
-#### workflow
-#### 1. download from database
+#### 背景介绍
+microRNA(miRNA)是一类能够调节基因表达的短单链内源非编码RNA(约22nt)，通过与互补的mRNA选择性结合抑制蛋白的产生，广泛存在于动物、植物、病毒等多种有机体中。miRNA在许多生物过程中起关键作用，包括发育、细胞分化、增值、凋亡、肿瘤转移等。
+#### miRNA靶基因预测
+##### 1. download from database
 ##### miRTarBase: the experimentally validated microRNA-target interactions database
 As a database, miRTarBase has accumulated more than three hundred and sixty thousand miRNA-target interactions (MTIs), which are collected by manually surveying pertinent literature after NLP of the text systematically to filter research articles related to functional studies of miRNAs. Generally, the collected MTIs are validated experimentally by reporter assay, western blot, microarray and next-generation sequencing experiments. While containing the largest amount of validated MTIs, the miRTarBase provides the most updated collection by comparing with other similar, previously developed databases.
+
 http://mirtarbase.mbc.nctu.edu.tw/php/index.php
 
 Chou et al. miRTarBase update 2018: a resource for experimentally validated microRNA-target interactions. Nucleic Acids Research, 2018
 ##### miRWalk2.0: a comphrehensive atlas of microRNA-target interactions
-miRWalk2.0 is a comprehensive archive, supplying the largest available collection of predicted and experimentally verified microRNA(miRNA)-target interactions(~949 million)
+miRWalk2.0 is a comprehensive archive, supplying the largest available collection of predicted and experimentally verified microRNA(miRNA)-target interactions(~949 million).
+
 http://zmf.umm.uni-heidelberg.de/apps/zmf/mirwalk2/index.html
 
 Dweep, H et al. miRWalk2.0: a comprehensive atlas of microRNA-target interactions, Nature Methods, 2015.
 
 #### 2. prediction by bioinformatics tools
+目前常规的算法主要遵循以下几个常用原则：（1）miRNA与靶基因的互补性；（2）miRNA靶位点在不同物种之间的保守性；（3）miRNA-mRNA双链之间的热稳定性；
+（4）miRNA靶位点不会有复杂的二级结构；（5）miRNA的5'端于靶基因的结合能力强于3’端。除了这些基本原则外，不同的预测方法还会根据各自总结的规律对算法进行限制和优化。
 #### miRanda
+http://cbio.mskcc.org/microrna_data/manual.html
 ```
 miranda miRNA.fa target_sequence.fa >miRanda.output
 ```
@@ -83,3 +90,17 @@ TTTGTCAACTCAATTTAAGAAACATTTCTGTTGTAGTTTAGTGATTGCTAGCAGAAAGCACTTTGTTTAA
 TTGTACATTTTATATTATGCTGTAATATTTTAATATACATAAATATCATTATTGATCTCATGAATATGTT
 CATAAGACAACAAAAATTATATATATGAATACATCTATGTGTATGTGTAAAG
 ```
+##### output
+```
+   Forward:	Score: 167.000000  Q:2 to 20  R:3340 to 3360 Align Len (18) (83.33%) (94.44%)
+
+   Query:    3' gtCGAAAGTTTTACTAGAGTg 5'
+                  |:||||| |||||||||: 
+   Ref:      5' taGTTTTCACAATGATCTCGg 3'
+
+   Energy:  -24.540001 kCal/Mol
+
+Scores for this hit:
+>gi|29565487|emb|AJ550546.1|	gi|945100|gb|U31226.1|DMU31226	167.00	-24.54	2 20	3340 3360	18	83.33%	94.44%
+```
+mirna Target  Score Energy-Kcal/Mol Query-Aln(start-end) Subjetct-Al(Start-End) Al-Len Subject-Identity Query-Identity
