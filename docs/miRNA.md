@@ -17,8 +17,19 @@ http://zmf.umm.uni-heidelberg.de/apps/zmf/mirwalk2/index.html
 Dweep, H et al. miRWalk2.0: a comprehensive atlas of microRNA-target interactions, Nature Methods, 2015.
 
 #### 2. prediction by bioinformatics tools
-目前常规的算法主要遵循以下几个常用原则：（1）miRNA与靶基因的互补性；（2）miRNA靶位点在不同物种之间的保守性；（3）miRNA-mRNA双链之间的热稳定性；
-（4）miRNA靶位点不会有复杂的二级结构；（5）miRNA的5'端于靶基因的结合能力强于3’端。除了这些基本原则外，不同的预测方法还会根据各自总结的规律对算法进行限制和优化。
+目前常规的算法主要遵循以下几个常用原则：
+
+（1）miRNA与靶基因的互补性；
+
+（2）miRNA靶位点在不同物种之间的保守性；
+
+（3）miRNA-mRNA双链之间的热稳定性；
+
+（4）miRNA靶位点不会有复杂的二级结构；
+
+（5）miRNA的5'端于靶基因的结合能力强于3’端。
+
+除了这些基本原则外，不同的预测方法还会根据各自总结的规律对算法进行限制和优化。
 #### miRanda
 http://cbio.mskcc.org/microrna_data/manual.html
 ```
