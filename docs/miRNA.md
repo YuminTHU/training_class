@@ -30,7 +30,9 @@ Dweep, H et al. miRWalk2.0: a comprehensive atlas of microRNA-target interaction
 （5）miRNA的5'端于靶基因的结合能力强于3’端。
 
 除了这些基本原则外，不同的预测方法还会根据各自总结的规律对算法进行限制和优化。
-#### miRanda
+#### （1）miRanda
+miRanda是将miRNA-mRNA之间的序列匹配，保守性和热稳定性作为计算参数。
+
 http://cbio.mskcc.org/microrna_data/manual.html
 ```
 miranda miRNA.fa target_sequence.fa >miRanda.output
@@ -115,3 +117,6 @@ Scores for this hit:
 >gi|29565487|emb|AJ550546.1|	gi|945100|gb|U31226.1|DMU31226	167.00	-24.54	2 20	3340 3360	18	83.33%	94.44%
 ```
 mirna Target  Score Energy-Kcal/Mol Query-Aln(start-end) Subjetct-Al(Start-End) Al-Len Subject-Identity Query-Identity
+
+#### （2）psRobot
+使用计算机预测植物miRNA靶基因比较简单，因为在植物中miRNA与靶基因几乎是以完全互补配对的方式结合，预测不需要复杂的算法。
