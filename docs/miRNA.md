@@ -33,7 +33,8 @@ Dweep, H et al. miRWalk2.0: a comprehensive atlas of microRNA-target interaction
 #### （1）miRanda
 miRanda是将miRNA-mRNA之间的序列匹配，保守性和热稳定性作为计算参数。
 
-http://cbio.mskcc.org/microrna_data/manual.html
+download miRanda from this page: http://www.microrna.org/microrna/getDownloads.do
+
 ```
 miranda miRNA.fa target_sequence.fa >miRanda.output
 ```
