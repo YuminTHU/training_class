@@ -2,8 +2,9 @@
 ### workflow
 ![](../assets/APA.F1.jpg)
 ### 背景介绍
+Alternative polyadenylation (APA) leading to the production of two mRNA isoforms with different 3ʹ untranslated regions (3ʹ UTRs)The dynamic usage of the 3’untranslated region (3’UTR) resulting from alternative polyadenylation (APA) is emerging as a pervasive mechanism for regulating mRNA diversity, stability and translation. 
 ![](../assets/APA.F2.jpg)
-### 数据处理
+### Data Processing
 #### DaPars
 ##### step1. Generate region annotation: python DaPars_Extract_Anno.py -b gene.bed -s symbol_map.txt -o extracted_3UTR.bed
 DaPars will use the extracted distal polyadenylation sites to infer the proximal polyadenylation sites based on the alignment wiggle files of two samples. The output in this step will be used by the next step.
@@ -49,3 +50,4 @@ PDUI_cutoff=0.5
 
 Fold_change_cutoff=0.59
 ```
+##### step3. Filter diff-APA events
