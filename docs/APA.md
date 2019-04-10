@@ -1,8 +1,8 @@
 ## 可变多聚腺苷酸化（Alternative polyadenylation）
 ### workflow
-
+![](../assets/APA.F1.jpg)
 ### 背景介绍
-
+![](../assets/APA.F2.jpg)
 ### 数据处理
 #### DaPars
 ##### step1. Generate region annotation: python DaPars_Extract_Anno.py -b gene.bed -s symbol_map.txt -o extracted_3UTR.bed
