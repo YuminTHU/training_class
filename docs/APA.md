@@ -1,7 +1,7 @@
 ## 可变多聚腺苷酸化（Alternative polyadenylation）
 ### workflow
 ![](../assets/APA.F1.jpg)
-### 背景介绍
+### Background
 Alternative polyadenylation (APA) leading to the production of two mRNA isoforms with different 3ʹ untranslated regions (3ʹ UTRs)The dynamic usage of the 3’untranslated region (3’UTR) resulting from alternative polyadenylation (APA) is emerging as a pervasive mechanism for regulating mRNA diversity, stability and translation. 
 ![](../assets/APA.F2.jpg)
 ### Data Processing
