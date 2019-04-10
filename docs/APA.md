@@ -13,6 +13,9 @@ DaPars will use the extracted distal polyadenylation sites to infer the proximal
 python DaPars_Extract_Anno.py -b hg19_refseq_whole_gene.bed -s hg19_4_19_2012_Refseq_id_from_UCSC.txt -o hg19_refseq_extracted_3UTR.bed
 
 ```
+###### input
+###### output
+
 ##### step2. Main function to get final result: python DaPars_main.py configure_file
 Run this function to get the final result. The configure file is the only parameter for DaPars_main.py, which stores all the parameters.
 The format of the configure is:
@@ -50,4 +53,11 @@ PDUI_cutoff=0.5
 
 Fold_change_cutoff=0.59
 ```
+###### input
+###### output
+![](../assets/APA.F3.jpg)
+
 ##### step3. Filter diff-APA events
+###### input
+###### output
+
