@@ -39,12 +39,12 @@ download miRanda from this page: http://www.microrna.org/microrna/getDownloads.d
 miranda miRNA.fa target_sequence.fa >miRanda.output
 ```
 miRanda is an algorithm for the detection of potential microRNA target sites in genomic sequences. miRanda reads RNA sequences (such as microRNAs) from file1 and genomic DNA/RNA sequences from file2. Both of these files should be in FASTA format. This is an example:
-##### file1: miRNA.fa
+##### input file1: miRNA.fa
 ```
 >gi|29565487|emb|AJ550546.1| Drosophila melanogaster microRNA miR-bantam
 GTGAGATCATTTTGAAAGCTG
 ```
-##### file2: target_sequence.fa
+##### input file2: target_sequence.fa
 ```
 >gi|945100|gb|U31226.1|DMU31226 Drosophila melanogaster head involution defective protein (hid) mRNA, complete cds (3'UTR only)
 TGACAAAAAATAAAAAACGAAATCCATCGTGAACAGTTTTGTGTTTTTAAATCAGTTCTAAACACGAAAA
