@@ -121,5 +121,11 @@ mirna Target  Score Energy-Kcal/Mol Query-Aln(start-end) Subjetct-Al(Start-End) 
 
 #### （2）psRobot
 使用计算机预测植物miRNA靶基因比较简单，因为在植物中miRNA与靶基因几乎是以完全互补配对的方式结合，预测不需要复杂的算法。
+
 website: http://omicslab.genetics.ac.cn/psRobot/target_prediction_1.php
+
+psRobot_tar is designed to find potential small RNA targets
+```
+psRobot_tar -s miRNA.fa -t target_sequence.fa -o smRNA-target.gTP
+```
 
