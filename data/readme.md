@@ -1,0 +1,1 @@
+data for training class
