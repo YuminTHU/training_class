@@ -4,7 +4,7 @@
 
 ## 1.Pipeline
 
-![](.gitbook/assets/co-expression-pipeline.png)
+![](../assets/co-expression-pipeline.png)
 
 首先计算基因之间的相关系数，构建基因网络\(correlation network of genes\)，然后将具有相似表达模式的基因划分成模块\(module\)。随后计算各个模块与样本表型数据之间的相关性，对特定的感兴趣的模块分析核心基因\(hub gene，通常是转录因子等关键的调控因子\)，并将特定模块的基因提取出来，进行GO/KEGG等分析。
 
@@ -145,7 +145,7 @@ text(sft$fitIndices[,1], sft$fitIndices[,5], labels=powers, cex=cex1,col="red")
 dev.off()
 ```
 
-![](.gitbook/assets/soft_thresholding.png)
+![](../assets/soft_thresholding.png)
 
 ```text
 sft$powerEstimate
@@ -206,7 +206,7 @@ plotDendroAndColors(net$dendrograms[[1]], mergedColors[net$blockGenes[[1]]],
 dev.off()
 ```
 
-![](.gitbook/assets/module_visualization.png)
+![](../assets/module_visualization.png)
 
 ### 3.5 Quantify module similarity by eigengene correlation
 
@@ -227,7 +227,7 @@ plotEigengeneNetworks(MET,"", marDendro=c(0,4,1,2),
 dev.off()
 ```
 
-![](.gitbook/assets/eigengenes_trait_relationship.png)
+![](../assets/eigengenes_trait_relationship.png)
 
 The top part of this plot represents the eigengene dendrogram and the lower part of this plot represents the eigengene adjacency heatmap.
 
@@ -267,7 +267,7 @@ labeledHeatmap(Matrix = moduleTraitCor,
 dev.off()
 ```
 
-![](.gitbook/assets/module_trait_relationship.png)
+![](../assets/module_trait_relationship.png)
 
 In this plot, we find that the the "brown" module in trait “Luminal” has the highest correlation value \(0.86\).
 
@@ -349,7 +349,7 @@ cyt = exportNetworkToCytoscape(filter,
     nodeAttr = moduleColors[inModule][1:nTop])
 ```
 
-#### ![](.gitbook/assets/cytoscapeinput-edges-filter-brown2.png)
+#### ![](../assets/cytoscapeinput-edges-filter-brown2.png)
 
 This plot is visualized by Cytoscape.
 
