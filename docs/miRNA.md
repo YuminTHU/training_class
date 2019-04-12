@@ -104,7 +104,7 @@ TTTGTCAACTCAATTTAAGAAACATTTCTGTTGTAGTTTAGTGATTGCTAGCAGAAAGCACTTTGTTTAA
 TTGTACATTTTATATTATGCTGTAATATTTTAATATACATAAATATCATTATTGATCTCATGAATATGTT
 CATAAGACAACAAAAATTATATATATGAATACATCTATGTGTATGTGTAAAG
 ```
-##### output
+##### output (example)
 ```
    Forward:	Score: 167.000000  Q:2 to 20  R:3340 to 3360 Align Len (18) (83.33%) (94.44%)
 
@@ -272,3 +272,7 @@ Sbjct:        627 ACGGTTTCTTCTAAACGGGAT 607
 
 ```
 
+#### （3）other recommended tools:
+RNAhybrid: https://bibiserv2.cebitec.uni-bielefeld.de/rnahybrid
+TargetScan: http://www.targetscan.org/vert_72/
+psRNATarget: http://plantgrn.noble.org/psRNATarget/ (specific for plant)
