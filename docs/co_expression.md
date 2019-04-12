@@ -21,7 +21,7 @@
 
 Import data
 
-```text
+```r
 setwd("/Share/home/xixiaochen/project/training/")
 datExpr <- readRDS(file="/Share2/home/lulab/xixiaochen/training/co_expression/input_fpkm_matrix.rds")
 datTraits <- readRDS(file="/Share2/home/lulab/xixiaochen/training/co_expression/data_traits.rds")
@@ -29,12 +29,12 @@ datTraits <- readRDS(file="/Share2/home/lulab/xixiaochen/training/co_expression/
 
 Data character
 
-```text
+```r
 datExpr[1:4,1:4]
 dim(datExpr)
 ```
 
-```text
+```
 #           ENSG00000210082 ENSG00000198712 ENSG00000198804 ENSG00000210845
 #GSM1172844        78053.20       103151.73       112917.53        92808.32
 #GSM1172845        96200.86       157203.85       163847.92        93501.17
@@ -47,12 +47,12 @@ dim(datExpr)
 #### 56 cell lines (samples), 5000 genes
 ```
 
-```text
+```r
 datTraits[1:4,]
 dim(datTraits)
 ```
 
-```text
+```
 #                  gsm cellline       subtype
 #GSM1172844 GSM1172844    184A1 Non-malignant
 #GSM1172845 GSM1172845    184B5 Non-malignant
@@ -78,7 +78,7 @@ dim(datTraits)
 
 ### 3.0 Install packages
 
-```text
+```r
 source("https://bioconductor.org/biocLite.R")
 biocLite(c("AnnotationDbi", "impute","GO.db", "preprocessCore", "multtest"))
 install.packages(c("WGCNA", "stringr", "reshape2"))
@@ -86,13 +86,13 @@ install.packages(c("WGCNA", "stringr", "reshape2"))
 
 ### 3.1 Library the WGCNA package
 
-```text
+```r
 library(WGCNA)
 ```
 
 ### 3.2 Pick the soft thresholding power
 
-```text
+```r
 options(stringsAsFactors = FALSE)
 #open multithreading 
 enableWGCNAThreads()
@@ -102,7 +102,7 @@ powers = c(c(1:10), seq(from=12, to=20, by=2))
 sft=pickSoftThreshold(datExpr, powerVector = powers, verbose = 5)
 ```
 
-```text
+```
 #pickSoftThreshold: will use block size 5000.
 # pickSoftThreshold: calculating connectivity for given powers...
 #   ..working on genes 1 through 5000 of 5000
@@ -124,7 +124,7 @@ sft=pickSoftThreshold(datExpr, powerVector = powers, verbose = 5)
 #15    20   0.9220 -1.820          0.986    0.102  1.63e-02    2.89
 ```
 
-```text
+```r
 pdf(file="/Share2/home/lulab/xixiaochen/training/co_expression/soft_thresholding.pdf",width=9, height=5)
 #Plot the results:
 par(mfrow = c(1,2))
@@ -147,7 +147,7 @@ dev.off()
 
 ![](../assets/soft_thresholding.png)
 
-```text
+```r
 sft$powerEstimate
 #[1] 6
 #best_beta = sft$powerEstimate
@@ -155,7 +155,7 @@ sft$powerEstimate
 
 ### 3.3 One-step network construction and module detection
 
-```text
+```r
 net = blockwiseModules(datExpr,
                  power = sft$powerEstimate,
                  maxBlockSize = 6000,
@@ -167,7 +167,7 @@ net = blockwiseModules(datExpr,
                  verbose = 3)
 ```
 
-```text
+```r
 table(net$colors)
 #   0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15 
 # 246 1671  355  305  279  270  241  175  168  124  108  101   88   87   84   84 
@@ -178,7 +178,7 @@ table(net$colors)
 
 ### 3.4 Module visualization
 
-```text
+```r
 #Convert labels to colors for plotting
 mergedColors = labels2colors(net$colors)
 table(mergedColors)
@@ -210,7 +210,7 @@ dev.off()
 
 ### 3.5 Quantify module similarity by eigengene correlation
 
-```text
+```r
 #Quantify module similarity by eigengene correlation
 #Eigengene: One of a set of right singular vectors of a gene's x samples matrix that tabulates, e.g., the mRNA or gene expression of the genes across the samples.
 
@@ -233,7 +233,7 @@ The top part of this plot represents the eigengene dendrogram and the lower part
 
 ### 3.6 Find the relationships between modules and traits
 
-```text
+```r
 #Plot the relationships between modules and traits
 design = model.matrix(~0+ datTraits$subtype)
 colnames(design) = levels(datTraits$subtype)
@@ -277,7 +277,7 @@ We choose the "brown" module in trait “Luminal” for further analyses.
 
 #### 3.7.1 Intramodular connectivity, module membership, and screening for intramodular hub genes
 
-```text
+```r
 #Intramodular connectivity, module membership, and screening for intramodular hub genes
 #Intramodular connectivity
 connet=abs(cor(datExpr,use="p"))^6
@@ -310,7 +310,7 @@ hubgenes
 
 #### 3.7.2 Export the network
 
-```text
+```r
 #Export the network
 #Recalculate topological overlap
 TOM = TOMsimilarityFromExpr(datExpr, power = 6) 
@@ -355,7 +355,7 @@ This plot is visualized by Cytoscape.
 
 The output files look like:
 
-```text
+```bash
 #Bash Shell command:
 head CytoscapeInput-edges-filter-brown.txt
 #fromNode    toNode    weight    direction    fromAltName    toAltName
@@ -375,7 +375,7 @@ head CytoscapeInput-nodes-filter-brown.txt
 
 #### 3.7.3 Extract gene IDs in specific module
 
-```text
+```r
 #Extract gene IDs in specific module
 #Select module
 module = "brown"
@@ -388,7 +388,7 @@ write.table(modProbes,file="/Share/home/xixiaochen/project/training/geneID_brown
 
 The output file looks like:
 
-```text
+```bash
 head geneID_brown.txt
 #ENSG00000170421
 #ENSG00000111057
@@ -403,14 +403,14 @@ We could use the gene ID list for GO/KEGG analysis.
 
 Library packages and load the input data
 
-```text
+```r
 library(multtest)
 lnc_mRNA_dataExpr <- readRDS(file="/Share/home/xixiaochen/project/training/lnc_mRNA_dataExpr.rds")
 ```
 
 The input file looks like:
 
-```text
+```r
 dim(lnc_mRNA_dataExpr)
 #[1]     6 19028
 #The input data contains 6 samples, 19028 genes (13832 protein coding genes, 5196 lncRNAs). 
@@ -425,7 +425,7 @@ lnc_mRNA_dataExpr[1:4,1:4]
 
 Calculate the pearson correlation between every two genes.
 
-```text
+```r
 #Calculate the pearson correlation
 Pcc = cor(lnc_mRNA_dataExpr, method = "pearson")
 
@@ -451,7 +451,7 @@ Pcc_pvalue[1:4,1:4]
 #ENSMUSG00000010492.10             0.4325254            0.2858186             0.6719851             0.0000000
 ```
 
-```text
+```r
 write.table(Pcc, file ="/Share/home/xixiaochen/project/training/pcc.txt", quote = F, row.names = F, sep="\t")
 write.table(Pcc_pvalue, file ="/Share/home/xixiaochen/project/training/pcc_pvalue.txt", quote = F,row.names = F, sep="\t")
 
@@ -463,14 +463,14 @@ write.table(pcc_pvalue_colnames, file ="/Share/home/xixiaochen/project/training/
 write.table(pcc_pvalue_rownames, file ="/Share/home/xixiaochen/project/training/Pcc_pvalue_rownames.txt", quote = F, row.names = F, sep="\t")
 ```
 
-```text
+```bash
 #Bash Shell command:
 #Extract the "protein coding gene & lncRNA" gene-gene pairs
 sed -n '5198,19029p' pcc_pvalue.txt | cut -f 1-5196 > lnc_coding_pvalue.txt
 sed -n '5198,19029p' pcc.txt | cut -f 1-5196 > lnc_coding_pcc.txt
 ```
 
-```text
+```r
 #use the multtest package
 raw_pvalue = read.table("/Share/home/xixiaochen/project/training/lnc_coding_pvalue.txt", sep='\t', quote="", comment="")
 #The input file looks like
@@ -487,7 +487,7 @@ raw_pvalue[1:4,1:4]
 #The row names are in the "Pcc_pvalue_rownames.txt" file, the column names are in the "Pcc_pvalue_colnames.txt".
 ```
 
-```text
+```r
 #Calculate the adjusted p-values
 setwd("/Share/home/xixiaochen/project/training/adjp/")
 #the multtest package: output=adjusted p-values from small to large order, index=original row and column information
@@ -503,7 +503,7 @@ for (i in seq(1,dim(raw_pvalue)[2])){
 
 In the previous step, we will get 5196 files. In this step, process these file to get gene pairs with an adjusted P-value of 0.01 or less and with a Pcc value ranked in the top or bottom 0.05 percentile.
 
-```text
+```bash
 #Bash Shell command:
 python get_gene_pairs.py
 perl get_gene_pairs.pl adjp_cut.txt pcc_cut.txt gene_pairs.txt
@@ -511,7 +511,7 @@ perl get_gene_pairs.pl adjp_cut.txt pcc_cut.txt gene_pairs.txt
 
 the get\_gene\_pairs.py contains:
 
-```text
+```python
 import pandas as pd
 import numpy as np
 import os
@@ -577,7 +577,7 @@ adjp_df.to_csv(adjp_out_file,sep='\t',index=False)
 
 the get\_gene\_pairs.pl contains:
 
-```text
+```perl
 #! /usr/bin/perl
 open I1, "<$ARGV[0]";
 open I2, "<$ARGV[1]";
@@ -620,7 +620,7 @@ Please make sure all the input files and the python script are in the same work 
 
 The output files looks like:
 
-```text
+```bash
 #Bash Shell command:
 head pcc_cut.txt
 #coding genes            lncRNA                    Pcc
@@ -650,7 +650,7 @@ Please make sure all the input files and the perl script are in the same work di
 
 the output file looks like:
 
-```text
+```bash
 head gene_pairs.txt 
 #mRNA                     lncRNA                  pcc               adjp
 #ENSMUSG00000000028.15    ENSMUSG00000104253.1    0.996498171575    0.000538351806502
