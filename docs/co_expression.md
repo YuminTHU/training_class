@@ -399,7 +399,12 @@ head geneID_brown.txt
 
 We could use the gene ID list for GO/KEGG analysis.
 
-### 3.7 Construct the lncRNA-mRNA co-expression network
+## 4 Appendix：functional annotation of lncRNA
+### 4.1 GO/KEGG analysis of the module which interested lncRNA involved in.
+
+![](../assets/co-expression-pipeline.png)
+
+### 4.2 Construct the lncRNA-mRNA co-expression network, functional analysis of mRNAs which are co-expressed with these interested lncRNAs.
 
 Library packages and load the input data
 
