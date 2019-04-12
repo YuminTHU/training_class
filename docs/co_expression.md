@@ -402,7 +402,7 @@ We could use the gene ID list for GO/KEGG analysis.
 ## 4 Appendix：functional annotation of lncRNA
 ### 4.1 GO/KEGG analysis of the module which interested lncRNA involved in.
 
-![](../assets/co-expression-pipeline.png)
+![](../assets/co-expression.lncRNA.png)
 
 ### 4.2 Construct the lncRNA-mRNA co-expression network, functional analysis of mRNAs which are co-expressed with these interested lncRNAs.
 
