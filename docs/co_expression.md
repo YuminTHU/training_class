@@ -458,8 +458,6 @@ write.table(Pcc_pvalue, file ="/Share/home/xixiaochen/project/training/pcc_pvalu
 #Get the row and column names
 pcc_pvalue_colnames=colnames(Pcc_pvalue)
 pcc_pvalue_rownames=rownames(Pcc_pvalue)
-#write.table(pcc_pvalue_colnames, file ="/home/songyabing/WGCNA/pcc_related/Pcc_pvalue_colnames.txt", quote = F, row.names = F, sep="\t")
-#write.table(pcc_pvalue_rownames, file ="/home/songyabing/WGCNA/pcc_related/Pcc_pvalue_rownames.txt", quote = F, row.names = F, sep="\t")
 
 write.table(pcc_pvalue_colnames, file ="/Share/home/xixiaochen/project/training/Pcc_pvalue_colnames.txt", quote = F, row.names = F, sep="\t")
 write.table(pcc_pvalue_rownames, file ="/Share/home/xixiaochen/project/training/Pcc_pvalue_rownames.txt", quote = F, row.names = F, sep="\t")
