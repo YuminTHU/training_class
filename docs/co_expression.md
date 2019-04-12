@@ -14,6 +14,8 @@
 
 ### 2.2.Input data
 
+输入数据的准备：这里主要是表达矩阵，如果是芯片数据，那么常规的归一化矩阵即可，如果是转录组数据，最好是RPKM值或者其它归一化好的表达量。然后就是临床信息或者其它表型，总之就是样本的属性。
+
 | File name | Description |
 | :--- | :--- |
 | input\_fpkm\_matrix.rds | GSE48213 breast cancer gene expression matrix \(top 5,000\) |
@@ -88,7 +90,7 @@ WGCNA译为加权基因共表达网络分析。该分析方法旨在寻找协同
 
 第一步计算任意两个基因之间的相关系数（Person Coefficient）。为了衡量两个基因是否具有相似表达模式，一般需要设置阈值来筛选，高于阈值的则认为是相似的。但是这样如果将阈值设为0.8，那么很难说明0.8和0.79两个是有显著差别的。因此，**WGCNA分析时采用相关系数加权值，即对基因相关系数取N次幂**，使得网络中的基因之间的连接服从**无尺度网络分布(scale-freenetworks)** ，这种算法更具生物学意义。
 
-第二步通过基因之间的相关系数构建分层聚类树，**聚类树的不同分支代表不同的基因模块**，不同颜色代表不同的模块。基于基因的加权相关系数，将基因按照表达模式进行分类，将模式相似的基因归为一个模块。这样就可以将几万个基因通过基因表达模式被分成了几十个模块，是一个提取归纳信息的过程。
+**无尺度网络分布**：大部分节点只和很少节点连接，而有极少的节点与非常多的节点连接，生物体选择scale-free network可以保证少数关键基因执行着主要功能，只要保证hub的完整性，整个生命体系的基本活动在一定刺激影响下将不会受到太大影响。
 
 第三步得到模块之后可以做很多下游分析：
 （1）模块的功能富集
@@ -169,6 +171,8 @@ dev.off()
 
 ![](../assets/soft_thresholding.png)
 
+软阈值（即权重参数，可以理解为相关系数的β次幂）取值默认为1到30，上述图形的横轴均代表软阈值，左图的纵轴数值越大，说明该网络越逼近无尺度网络，右图的纵轴表示对应的基因模块中所有基因邻接性的均值。
+
 ```r
 sft$powerEstimate
 #[1] 6
@@ -176,6 +180,9 @@ sft$powerEstimate
 ```
 
 ### 3.3 One-step network construction and module detection
+
+把输入的表达矩阵的**几千个基因组归类成了几十个模块。**大体思路：计算基因间的邻接性，根据邻接性计算基因间的相似性，然后推出基因间的相异性系数，并据此得到基因间的系统聚类树。然后按照混合动态剪切树的标准，设置每个基因模块最少的基因数目为30。
+
 
 ```r
 net = blockwiseModules(datExpr,
@@ -199,6 +206,8 @@ table(net$colors)
 ```
 
 ### 3.4 Module visualization
+
+这里用不同的颜色来代表那些所有的模块，其中灰色默认是无法归类于任何模块的那些基因，如果灰色模块里面的基因太多，那么前期对表达矩阵挑选基因的步骤可能就不太合适。
 
 ```r
 #Convert labels to colors for plotting
@@ -255,6 +264,8 @@ The top part of this plot represents the eigengene dendrogram and the lower part
 
 ### 3.6 Find the relationships between modules and traits
 
+模块与性状之间的关系
+
 ```r
 #Plot the relationships between modules and traits
 design = model.matrix(~0+ datTraits$subtype)
@@ -289,9 +300,13 @@ labeledHeatmap(Matrix = moduleTraitCor,
 dev.off()
 ```
 
+通过模块与各种表型的相关系数，可以很清楚的挑选自己感兴趣的模块进行下游分析了。这个图就是把moduleTraitCor这个矩阵给用热图可视化一下。
+
+
 ![](../assets/module_trait_relationship.png)
 
-In this plot, we find that the the "brown" module in trait “Luminal” has the highest correlation value \(0.86\).
+从上图已经可以看到跟乳腺癌分类相关的基因模块了，包括"Basal" "Claudin-low" "Luminal" "Non-malignant" "unknown" 这5类所对应的不同模块的基因列表。可以看到每一种乳腺癌都有跟它强烈相关的模块，可以作为它的表达signature，模块里面的基因可以拿去做下游分析。我们看到Luminal表型跟棕色的模块相关性高达0.86，而且极其显著的相关，所以值得我们挖掘，这个模块里面的基因是什么，为什么如此的相关呢？
+
 
 ### 3.7 Select specific module
 
@@ -422,7 +437,8 @@ head geneID_brown.txt
 We could use the gene ID list for GO/KEGG analysis.
 
 ## 4 Appendix：functional annotation of lncRNA
-### 4.1 GO/KEGG analysis of the module which interested lncRNA involved in.
+### 4.1 GO/KEGG analysis of the module which interested lncRNAs are involved in.
+在WGCNA得到模块之后，通过fisher exact test分析感兴趣的lncRNA(例如：上调或者下调)是否在这些模块中显著富集，挑选出显著富集的模块中的protein coding genes做功能分析。
 
 ![](../assets/co-expression.lncRNA.png)
 
@@ -690,7 +706,7 @@ head gene_pairs.txt
 
 We could extract the mRNA gene set for GO/KEGG analysis.
 
-## 4.Reference
+## 5.Reference
 
 [https://github.com/jmzeng1314/my\_WGCNA](https://github.com/jmzeng1314/my_WGCNA)
 
