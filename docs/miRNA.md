@@ -228,6 +228,9 @@ CAATTTCCTTCTGGATTCTGTTGGTATGACAACTTTGTTACTCTGTCAAACATGTCTACGACTATTTTAAAACCATTTCA
 GAGATTA
 ```
 ##### output
+
+Score: target penalty score, lower is better (0-5), default = 2.5
+
 ```
 >smRNA01	Score: 1.0	tar02
 
