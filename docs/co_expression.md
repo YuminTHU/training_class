@@ -711,3 +711,5 @@ We could extract the mRNA gene set for GO/KEGG analysis.
 [https://github.com/jmzeng1314/my\_WGCNA](https://github.com/jmzeng1314/my_WGCNA)
 
 [https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/index.html](https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/index.html)
+
+[example](https://github.com/YuminTHU/training_class/tree/master/data/co_expression)
