@@ -71,3 +71,5 @@ density name    class
 boxplot of RBP enrichment
 
 ![](../assets/RBP_enrichment.png)
+
+[example](https://github.com/YuminTHU/training_class/tree/master/data/RBP_interaction)
