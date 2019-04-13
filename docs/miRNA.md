@@ -1,6 +1,10 @@
 ### miRNA target analysis
 #### 背景介绍
 microRNA(miRNA)是一类能够调节基因表达的短单链内源非编码RNA(约22nt)，通过与互补的mRNA选择性结合抑制蛋白的产生，广泛存在于动物、植物、病毒等多种有机体中。miRNA在许多生物过程中起关键作用，包括发育、细胞分化、增值、凋亡、肿瘤转移等。
+
+#### workflow
+![](../assets/miRNA.pipeline.png)
+
 #### miRNA靶基因预测
 ##### 1. download from database
 ##### miRTarBase: the experimentally validated microRNA-target interactions database
