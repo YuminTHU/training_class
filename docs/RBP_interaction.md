@@ -1,3 +1,6 @@
+### workflow
+![](../assets/RBP.pipeline.png)
+
 ### 1. get CLIP-seq data
 #### 1.1 download from http://lulab.life.tsinghua.edu.cn/postar/download.php
 #### 1.2 get from /BioII/lulab_b/shared/projects/POSTAR2/CLIP_seq/bed
@@ -66,3 +69,4 @@ density name    class
 2       ENSG00000115758.12__10441554__10441584__100     up
 ```
 boxplot of RBP enrichment
+![](../assets/RBP_enrichment.png)
