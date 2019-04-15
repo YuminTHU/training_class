@@ -72,3 +72,24 @@ java -jar BEAM_release1.6.1.jar -f BEAMready.fa -g bg.fa -w 10 -W 40 -M 3
 screenshot of output
 
 #### 2.4 visualize motif
+#### 2.4.1 install weblogo
+```
+pip install weblogo
+```
+##### 2.4.2 plot with suggested command
+we should not only specify -o option with format suffix, we should also specify -F with format
+```
+# -o:Output file (default: stdout)
+# -F:Format of output: eps (default), png, png_print, pdf, jpeg, svg, logodata
+weblogo -a 'ZAQXSWCDEVFRBGTNHY' -f BEAMready_m1_run1_wl.fa -D fasta \
+-o out.jpeg -F jpeg --composition="none" \
+-C red ZAQ 'Stem' -C blue XSW 'Loop' -C forestgreen CDE 'InternalLoop' \
+-C orange VFR 'StemBranch' -C DarkOrange B 'Bulge' \
+-C lime G 'BulgeBranch' -C purple T 'Branching' \
+-C limegreen NHY 'InternalLoopBranch'
+```
+##### 2.4.3 example output
+
+###other recommended tools
+RNApromo
+RNAcontext
