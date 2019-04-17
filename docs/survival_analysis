@@ -223,21 +223,6 @@ fit = survfit(Surv(new_death, death_event) ~ CCDC58, data = survplotdata)
 #colnames(survplotdata2) = c('new_death', 'death_event', 'CCDC58', 'TP53')
 #survplotdata2 = as.data.frame(survplotdata2)
 #fit2 = survfit(Surv(new_death, death_event) ~ CCDC58+TP53, data = survplotdata2) 
-
-#draw survival curves
-pdf(file="/Share/home/xixiaochen/project/training/CCDC58_LIHC.pdf")
-ggsurvplot(fit,
-    risk.table = TRUE,
-    pval = TRUE,
-    break.time.by = 500,
-    ggtheme = theme_bw(),
-    legend.title = "CCDC58 expression",
-    legend.labs = c("Up-regulated ", "NotAltered"),
-    risk.table.y.text.col = TRUE,
-    risk.table.y.text = FALSE,
-    risk.table.col = "strata",
-    palette = c("red", "blue"))
-dev.off()
 ```
 
 **3.4 Draw survival curves**
@@ -259,7 +244,7 @@ ggsurvplot(fit,
 dev.off()
 ```
 
-![](.gitbook/assets/ccdc58_lihc.png)
+![](../assets/ccdc58_lihc.png)
 
 \*: each '+' represent a censored sample.
 
