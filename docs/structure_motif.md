@@ -1,12 +1,37 @@
 ## sequence motif analysis
 ### workflow
 ![](../assets/structure_motif.pipeline.png)
-### 0. get interested sequence and control sequence as sequence motif analysis
-### 1. GraphProt:modelling binding preferences of RNA-binding proteins
-#### 1.1 get optimized parameters
 
-#### 1.2 train a model
-#### 1.3 get structure motif with graphprot
+### 1.BEAM
+#### 1.1 Use RNAfold to get dot-bracket
+Compute the best (MFE) structure for this sequence (primary sequence with dot-bracket)
+```
+RNAfold <test.fa >dot.fa
+```
+#### 1.2 Get file with BEAR notation ---> fastB (fastBEAR).
+```
+awk '/^>/ {print; getline; print; getline; print $1}' dot.fa >dot_to_encode.fa
+java -jar /BioII/lulab_b/songyabing/motif_analysis/software/BEAM/beam-2.0/BearEncoder.new.jar dot_to_encode.fa BEAMready.fa
+```
+#### 1.3 get structure motifs
+```
+java -jar /BioII/lulab_b/songyabing/motif_analysis/software/BEAM/beam-2.0/BEAM_release1.6.1.jar -f BEAMready.fa -w 10 -W 40 -M 3 
+```
+#### 1.4 visualize motifs with weblogo
+##### 1.4.1 install weblogo
+```
+pip install weblogo
+```
+##### 1.4.2 visualize structure motifs
+```
+weblogo -a 'ZAQXSWCDEVFRBGTNHY' -f BEAMready_m1_run1_wl.fa -D fasta \
+-o out.jpeg -F jpeg --composition="none" \
+-C red ZAQ 'Stem' -C blue XSW 'Loop' -C forestgreen CDE 'InternalLoop' \
+-C orange VFR 'StemBranch' -C DarkOrange B 'Bulge' \
+-C lime G 'BulgeBranch' -C purple T 'Branching' \
+-C limegreen NHY 'InternalLoopBranch'
+```
+#### 1.4.3 example output
 
 
 
@@ -62,3 +87,10 @@ seq_10:0   9.15077    133     152     CAACCUCCACCUUCUGGGUU    .(((((.........)))
 seq_6:0    6.81294    1       16      UAUGGAGAUUUCCAUA        (((((......)))))        <<<<<,,,,,,>>>>>
 seq_8:0    0.233537   95      115     ACACCCCAGCCCUGCAGUGUA   ((((..((....))..)))).   <<<<,,--,,,,---->>>>,
 ```
+
+### 0. get interested sequence and control sequence as sequence motif analysis
+### 1. GraphProt:modelling binding preferences of RNA-binding proteins
+#### 1.1 get optimized parameters
+
+#### 1.2 train a model
+#### 1.3 get structure motif with graphprot
