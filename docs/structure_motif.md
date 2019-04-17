@@ -48,6 +48,10 @@ Positive sequences - a fasta format file containing the sequences to predict mot
 >Pos_1
 ATAAGAGACCACAAGCGACCCGCAGGGCCAGACGTTCTTCGCCGAGAGTCGTCGGGGTTTCCTGCTTCAACAGTGCTTGGACGGAACCCGGCGCTCGTTCCCCACCCCGGCCGGCCGCCCATAGCCAGCCCTCCGTCACCTCTTCACCGCACCCTCGGACTGCCCCAAGGCCCCCGCCGCCGCTCCA
 ```
+##### example output
+
+
+
 #### 2.3 find known motifs
 After learning a motif, you can search a database of sequences to find positions that match the motif you learned. To do that you need to first match a secondary structure to each of the input sequences in your database, either using existing structure prediction algorithms, or using some other information.
 #### 2.3.1 Produce a likelihood score for each sequence in the database.
