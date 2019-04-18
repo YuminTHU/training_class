@@ -240,11 +240,11 @@ ggsurvplot(fit,
     risk.table.y.text.col = TRUE,
     risk.table.y.text = FALSE,
     risk.table.col = "strata",
-    palette = c("red", "blue"))
+    palette = c("blue", "red"))
 dev.off()
 ```
 
-![](../assets/ccdc58_lihc.png)
+![](../assets/CCDC58_LIHC.png)
 
 \*: each '+' represent a censored sample.
 
