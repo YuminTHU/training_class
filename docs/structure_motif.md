@@ -32,8 +32,7 @@ weblogo -a 'ZAQXSWCDEVFRBGTNHY' -f BEAMready_m1_run1_wl.fa -D fasta \
 -C limegreen NHY 'InternalLoopBranch'
 ```
 #### 1.4.3 example output
-
-
+![](../assets/structure_motif.BEAM.png)
 
 ### 2. RNApromo
 #### 2.1 download
@@ -49,8 +48,7 @@ Positive sequences - a fasta format file containing the sequences to predict mot
 ATAAGAGACCACAAGCGACCCGCAGGGCCAGACGTTCTTCGCCGAGAGTCGTCGGGGTTTCCTGCTTCAACAGTGCTTGGACGGAACCCGGCGCTCGTTCCCCACCCCGGCCGGCCGCCCATAGCCAGCCCTCCGTCACCTCTTCACCGCACCCTCGGACTGCCCCAAGGCCCCCGCCGCCGCTCCA
 ```
 ##### example output
-
-
+![](../assets/structure_motif.RNApromo.png)
 
 #### 2.3 find known motifs
 After learning a motif, you can search a database of sequences to find positions that match the motif you learned. To do that you need to first match a secondary structure to each of the input sequences in your database, either using existing structure prediction algorithms, or using some other information.
