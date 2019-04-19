@@ -6,4 +6,24 @@ RNA is treated with a SHAPE reagent that reacts at conformationally dynamic nucl
 
 ### 1.shapemapper
 ShapeMapper automates the calculation of RNA structure probing reactivities from mutational profiling (MaP) experiments, in which chemical adducts on RNA are detected as internal mutations in cDNA through reverse transcription and read out by massively parallel sequencing. 
-#### 1.1 Use RNAfold to get dot-bracket
+```
+shapemapper \
+--target TPP.fa \
+--name "example-results" \
+--overwrite \
+--modified --folder TPPplus \
+--untreated --folder TPPminus \
+--star-aligner
+--verbose
+#--denatured --folder TPPdenat
+```
+#### input
+
+#### output
+1. example-results_TPP_histograms.pdf
+![](../assets/example-results_TPP_histograms.png)
+2. example-results_TPP_profiles.pdf 
+![](../assets/example-results_TPP_profiles.png)
+3. example-results_TPP_profile.txt
+4. example-results_TPP.map
+5. example-results_TPP.shape
