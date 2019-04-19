@@ -32,4 +32,14 @@ Nucleotide	Sequence	Modified_mutations	Modified_read_depth	Modified_effective_de
 2	g	0	4837	3405	0.000000	0	5270	3643	0.000000	0	nan	0.000000	0.000000	nan	nan	nan	nan
 ```
 4. example-results_TPP.map
+```
+1	-999	0	G
+2	-999	0	G
+3	-999	0	C
+```
 5. example-results_TPP.shape
+```
+1	-999
+2	-999
+3	-999
+```
