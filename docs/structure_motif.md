@@ -2,7 +2,9 @@
 ### workflow
 ![](../assets/structure_motif.pipeline.png)
 
+### 0. get interested sequence and control sequence as sequence motif analysis
 ### 1.BEAM
+http://beam.uniroma2.it/home
 #### 1.1 Use RNAfold to get dot-bracket
 Compute the best (MFE) structure for this sequence (primary sequence with dot-bracket)
 ```
@@ -90,9 +92,8 @@ seq_6:0    6.81294    1       16      UAUGGAGAUUUCCAUA        (((((......)))))  
 seq_8:0    0.233537   95      115     ACACCCCAGCCCUGCAGUGUA   ((((..((....))..)))).   <<<<,,--,,,,---->>>>,
 ```
 
-### 0. get interested sequence and control sequence as sequence motif analysis
-### 1. GraphProt:modelling binding preferences of RNA-binding proteins
-#### 1.1 get optimized parameters
-
-#### 1.2 train a model
-#### 1.3 get structure motif with graphprot
+### 3. other tools 
+#### 3.1 GraphProt:modelling binding preferences of RNA-binding proteins
+https://github.com/dmaticzka/GraphProt
+#### 3.2 RNAcontext: A New Method for Learning the Sequence and Structure Binding Preferences of RNA-Binding Proteins
+http://www.cs.toronto.edu/~hilal/rnacontext/
