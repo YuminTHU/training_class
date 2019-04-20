@@ -1,4 +1,4 @@
-## sequence motif analysis
+## structure motif analysis
 ### workflow
 ![](../assets/structure_motif.pipeline.png)
 
