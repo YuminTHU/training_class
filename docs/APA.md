@@ -34,7 +34,10 @@ chr9	95473645	95477745	NM_001003800|BICD2|chr9|-	0	-
 chr11	92623657	92629635	NM_001008781|FAT3|chr11|+	0	+
 ```
 
-##### step2. Main function to get final result: python DaPars_main.py configure_file
+##### step2. Main function to get final result
+```
+python DaPars_main.py configure_file
+```
 Run this function to get the final result. The configure file is the only parameter for DaPars_main.py, which stores all the parameters.
 ###### input
 1. configure_file
