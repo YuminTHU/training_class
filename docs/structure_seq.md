@@ -25,11 +25,16 @@ shapemapper \
 ![](../assets/example-results_TPP_histograms.png)
 2. example-results_TPP_profiles.pdf 
 ![](../assets/example-results_TPP_profiles.png)
-3. example-results_TPP_profile.txt
+3. example-results_TPP.shape
 ```
-Nucleotide	Sequence	Modified_mutations	Modified_read_depth	Modified_effective_depthModified_rate	Untreated_mutations	Untreated_read_depth	Untreated_effective_depth	Untreated_rate	Denatured_mutations	Denatured_read_depth	Denatured_effective_depth	Denatured_rate	Reactivity_profile	Std_err	HQ_profile	HQ_stderr	Norm_profile	Norm_stderr
-1	g	0	4788	4335	0.000000	0	5206	4666	0.000000	0	nan	0.000000	0.000000	nan	nan	nan	nan
-2	g	0	4837	3405	0.000000	0	5270	3643	0.000000	0	nan	0.000000	0.000000	nan	nan	nan	nan
+1	-999
+2	-999
+3	-999
+```
+explanation for each column:
+```
+column1: nucleotide number 
+column2: reactivity
 ```
 4. example-results_TPP.map
 ```
@@ -37,9 +42,18 @@ Nucleotide	Sequence	Modified_mutations	Modified_read_depth	Modified_effective_de
 2	-999	0	G
 3	-999	0	C
 ```
-5. example-results_TPP.shape
+explanation for each column:
 ```
-1	-999
-2	-999
-3	-999
+column1: nucleotide number 
+column2: reactivity
+column3: standard error
+column4: nucleotide sequence
 ```
+5. example-results_TPP_profile.txt
+```
+Nucleotide	Sequence	Modified_mutations	Modified_read_depth	Modified_effective_depthModified_rate	Untreated_mutations	Untreated_read_depth	Untreated_effective_depth	Untreated_rate	Denatured_mutations	Denatured_read_depth	Denatured_effective_depth	Denatured_rate	Reactivity_profile	Std_err	HQ_profile	HQ_stderr	Norm_profile	Norm_stderr
+1	g	0	4788	4335	0.000000	0	5206	4666	0.000000	0	nan	0.000000	0.000000	nan	nan	nan	nan
+2	g	0	4837	3405	0.000000	0	5270	3643	0.000000	0	nan	0.000000	0.000000	nan	nan	nan	nan
+```
+
+
