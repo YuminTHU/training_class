@@ -36,6 +36,9 @@ chr11	92623657	92629635	NM_001008781|FAT3|chr11|+	0	+
 
 ##### step2. Main function to get final result: python DaPars_main.py configure_file
 Run this function to get the final result. The configure file is the only parameter for DaPars_main.py, which stores all the parameters.
+###### input
+1. configure_file
+
 The format of the configure is:
 ```
 #The following file is the result of step 1.
@@ -71,11 +74,9 @@ PDUI_cutoff=0.5
 
 Fold_change_cutoff=0.59
 ```
-###### input
 ###### output
 ![](../assets/APA.F3.jpg)
 
 ##### step3. Filter diff-APA events
-###### input
-###### output
+FDR_cutoff, PDUI_cutoff, Fold_change_cutoff → Pass filer (Y nor N)
 
