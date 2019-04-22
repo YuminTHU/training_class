@@ -59,7 +59,6 @@ head(clinical_info)
 #TCGA-2Y-A9H2             NA         NA          1731     1731      1731           0
 #TCGA-2Y-A9H3             NA         NA          1516     1516      1516           0
 #TCGA-2Y-A9H4             NA         NA          1452     1452      1452           0
-#Each row represents a the RSEM normalized counts value of a gene, each column represents a sample
 #new_tumor_days = days_to_new_tumor_event_after_initial_treatment
 #death_days = days_to_death 
 #followUp_days = days_to_last_followup
