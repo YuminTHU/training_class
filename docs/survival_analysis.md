@@ -191,7 +191,7 @@ ind_gene = which(rownames(exp) == 'CCDC58')
 table(rna_event2[ind_gene,])
 #  0   2 
 #168 145
-#In the total 313 samples, CCDC58 gene are not differentially expressed in 168 samples, up-regulated differentially expressed in 146 samples.
+#In the total 313 samples, CCDC58 gene are not differentially expressed in 168 samples, up-regulated differentially expressed in 145 samples.
 ```
 
 **3.3 Fit survival curves**
