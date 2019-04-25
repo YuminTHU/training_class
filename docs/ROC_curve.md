@@ -7,11 +7,11 @@ The ROC curve is designed to __evaluate performance of classifier__ based on mod
 
 What we focus in ROC analysis is how well the model can perform, or how accurate can the model be. In other words, we should consider the proportion of correct guess and wrong guess given by this model. In the above-mentioned part, we already know that there is a real class and a predicted class given by models, thus separating each instance into four groups:
 
-![](assets/ROC_principle.jpg)
+![](../assets/ROC_principle.jpg)
 
 Then we need to calculate several parameters to evaluate the performance of every model. To draw a ROC curve, we need to calculate the true positive rate and the false positive rate of a classifier. The __true positive rate__ is calculated by dividing true positive number by total positive number. The __false positive rate__ is calculated by dividing false positive number by total negative number. In the plot, x axis represents false positive rate, and y axis represents true positive rate. Thus for each model with a given threshold, there is a point in the ROC plot to represent it. If the threshold becomes higher, more instances will be regarded as negative, thus reducing false positive rate but also reducing true positive rate, and vice versa. A better model can have greater y value(true positive rate) and less x value(false positive rate). The following figure displays a typical ROC curve for one model with different threshold.
 
-![](assets/ROCplot.jpg)
+![](../assets/ROCplot.jpg)
 
 Besides, there are other perameters that can be used to determine whether a model is good or not. __Sensitivity__ equals true positive rate. __Specificity__ equals true negative numbers dividing by the sum of false positive number and true negative number, or 1 minus false positive rate. These two parameters can also give information about whether this is a good model.
 
@@ -64,7 +64,7 @@ plot(rocobj)
 
 The curve should look like the following. Notice that false positive rate (0 to 1) equals specificity (1 to 0), and true positive rate (0 to 1) equals sensitivity (0 to 1).
 
-![](assets/ROCplot_single_feature.jpeg)
+![](../assets/ROCplot_single_feature.jpeg)
 
 ## Draw ROC curve using multiple features
 
@@ -168,7 +168,7 @@ plot(roc, main = 'ROC Curve')
 
 The curve should look like this:
 
-![](assets/ROCplot_multiple_features.jpeg)
+![](../assets/ROCplot_multiple_features.jpeg)
 
 ## Reference
 
