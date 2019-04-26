@@ -8,3 +8,5 @@
 * [structure motif](docs/structure_motif.md)
 * [structure-seq](docs/structure_seq.md)
 * [alternative polyadenylation](docs/APA.md)
+* [survival analysis](docs/survival_analysis.md)
+
