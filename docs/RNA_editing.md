@@ -1,6 +1,4 @@
 ## RNA editing
-### workflow
-![](../assets/RNA_editing.F1.jpg)
 ### Background
 Pre-mRNA molecules transcribed from the genome may fold to form double-stranded RNA (dsRNA) secondary structures. dsRNA-specific adenosine deaminase (ADAR) enzymes bind these structures and deaminate some adenosines to inosines. If these inosines are located in an exon, they will be present in the mature mRNA.
 
@@ -59,3 +57,6 @@ step4. Using binomial statistics to remove sequencing errors
 ```
 perl Binomial_analysis.pl main_output.txt >binomial_output.txt
 ```
+### citation
+1. 
+1. Identifying RNA Editing Sites in miRNAs by Deep Sequencing.
