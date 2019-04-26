@@ -58,5 +58,10 @@ step4. Using binomial statistics to remove sequencing errors
 perl Binomial_analysis.pl main_output.txt >binomial_output.txt
 ```
 ### citation
-1. 
-1. Identifying RNA Editing Sites in miRNAs by Deep Sequencing.
+1. A-to-I RNA editing — immune protector and transcriptome diversifier. Eli Eisenberg, et al. Nature Reviews, 2018.
+
+2. RNAEditor: easy detection of RNA editing events andthe introduction of editing islands. David John, et al. Briefings in Bioinformatics, 2017.
+
+3. Systematic characterization of A-to-I RNA editing hotspots in microRNAs across human cancers. Yumeng Wang, et al. Genome Research, 2017. 
+
+4. Identifying RNA Editing Sites in miRNAs by Deep Sequencing. Alon S, et al. Methods Mol Biol.2013.
