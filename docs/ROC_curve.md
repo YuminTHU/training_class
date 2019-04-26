@@ -82,7 +82,7 @@ TPR = TP/(TP+FN) = 77/(77+323) = 0.77，FPR = FP/(FP+TN) = 45/(45+55) = 0.45
 
 When we use single feature to draw ROC curve, we need to install and include `pROC` and `ggplot2` package. The data we will be using is displayed below:
 
-|SampleID|Expression_of_mi1|Type|
+|SampleID|Expression_of_miR-1|Type|
 |--------|-----------------|----|
 |1|66|cancer|
 |2|32|normal|
@@ -111,15 +111,15 @@ First we are going to input the data using `data.frame`. The code is as follows:
 
 ```R
 SampleID <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
-Expression_of_mi1 <- c(66, 32, 73, 82, 61, 71, 50, 41, 67, 45, 91, 72, 20, 85, 10, 74, 53, 41, 22, 49)
+Expression_of_miR-1 <- c(66, 32, 73, 82, 61, 71, 50, 41, 67, 45, 91, 72, 20, 85, 10, 74, 53, 41, 22, 49)
 Type <- c("cancer", "normal", "normal", "cancer", "normal", "normal", "normal", "cancer", "normal", "normal", "cancer", "normal", "normal", "cancer", "normal", "cancer", "cancer", "normal", "normal", "cancer")
-SampleData <- data.frame(SampleID, Expression_of_mi1, Type)
+SampleData <- data.frame(SampleID, Expression_of_miR-1, Type)
 ```
 
 Then using special function `roc` to construct ROC curve and use `plot` function to display the curve:
 
 ```R
-rocobj <- roc(SampleData$Type, SampleData$Expression_of_mi1)
+rocobj <- roc(SampleData$Type, SampleData$Expression_of_miR-1)
 plot(rocobj)
 ```
 
@@ -131,7 +131,7 @@ The curve should look like the following. Notice that false positive rate (0 to 
 
 The following part discusses how to draw ROC curve using R with multiple features. To accomplish this, we should make sure that the `ROCR` package has been installed and included in the program. We use random forest to construct a model to predict the type. The data we will be using is displayed below:
 
-|SampleID|Expression_of_mi1|Expression_of_mi2|Expression_of_mi3|Type|
+|SampleID|Expression_of_miR-1|Expression_of_miR-2|Expression_of_miR-3|Type|
 |--------|-----------------|-----------------|-----------------|----|
 |1|12|55|74|cancer|
 |2|87|44|46|normal|
@@ -165,11 +165,11 @@ First, we input the data into R using `data.frame`.
 
 ```R
 SampleID <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25)
-Expression_of_mi1 <- c(12, 87, 70, 74, 46, 58, 55, 33, 60, 50, 70, 22, 68, 90, 10, 78, 50, 70, 81, 44, 20, 51, 40, 30, 81)
-Expression_of_mi2 <- c(55, 44, 23, 35, 43, 31, 40, 50, 20, 22, 50, 60, 10, 30, 40, 50, 60, 33, 31, 11, 56, 31, 11, 60, 13)
-Expression_of_mi3 <- c(74, 46, 56, 69, 59, 90, 30, 76, 34, 11, 60, 90, 9, 20, 39, 23, 82, 51, 12, 5, 44, 17, 4, 57, 24)
+Expression_of_miR-1 <- c(12, 87, 70, 74, 46, 58, 55, 33, 60, 50, 70, 22, 68, 90, 10, 78, 50, 70, 81, 44, 20, 51, 40, 30, 81)
+Expression_of_miR-2 <- c(55, 44, 23, 35, 43, 31, 40, 50, 20, 22, 50, 60, 10, 30, 40, 50, 60, 33, 31, 11, 56, 31, 11, 60, 13)
+Expression_of_miR-3 <- c(74, 46, 56, 69, 59, 90, 30, 76, 34, 11, 60, 90, 9, 20, 39, 23, 82, 51, 12, 5, 44, 17, 4, 57, 24)
 Type <- c("cancer", "normal", "normal", "normal", "cancer", "cancer", "normal", "cancer", "normal", "normal", "cancer", "cancer", "normal", "normal", "cancer", "normal", "cancer", "normal", "normal", "normal", "cancer", "normal", "normal", "normal", "normal")
-SampleData <- data.frame(SampleID, Expression_of_mi1, Expression_of_mi2, Expression_of_mi3, Type)
+SampleData <- data.frame(SampleID, Expression_of_miR-1, Expression_of_miR-2, Expression_of_miR-3, Type)
 ```
 
 Set random seed so that the repeatability is ensured.
