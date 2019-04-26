@@ -2,6 +2,8 @@
 
 ## Survival analysis
 
+### 背景介绍
+1958年，Edward L. Kaplan 和Paul Meier也首次在临床研究中提出了生存曲线的概念，又被称作Kaplan-Meier曲线，主要用来对各组患者的生存状况进行描述。绘制生存曲线最主要的目的是进行生存分析，即通过将终点事件和出现这一终点所经历的时间结合起来进行统计分析，从而对两组患者的预后进行比较。
 ### 1.Pipeline
 
 **Survival analysis** is a branch of statistics for analyzing the expected duration of time until one or more events happen, such as death in biological organisms and failure in mechanical systems. \([https://en.wikipedia.org/wiki/Survival\_analysis](https://en.wikipedia.org/wiki/Survival_analysis)\)
