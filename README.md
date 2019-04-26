@@ -10,4 +10,5 @@
 * [alternative polyadenylation](docs/APA.md)
 * [survival analysis](docs/survival_analysis.md)
 * [ROC curve](docs/ROC_curve.md)
+* [RNA editing](docs/RNA_editing.md)
 
