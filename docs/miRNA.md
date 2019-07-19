@@ -43,12 +43,12 @@ download miRanda from this page: http://www.microrna.org/microrna/getDownloads.d
 miranda miRNA.fa target_sequence.fa >miRanda.output
 ```
 miRanda is an algorithm for the detection of potential microRNA target sites in genomic sequences. miRanda reads RNA sequences (such as microRNAs) from file1 and genomic DNA/RNA sequences from file2. Both of these files should be in FASTA format. This is an example:
-##### input file1: miRNA.fa
+##### input file1: miRanda.miRNA.fa
 ```
 >gi|29565487|emb|AJ550546.1| Drosophila melanogaster microRNA miR-bantam
 GTGAGATCATTTTGAAAGCTG
 ```
-##### input file2: target_sequence.fa
+##### input file2: miRanda.target_sequence.fa
 ```
 >gi|945100|gb|U31226.1|DMU31226 Drosophila melanogaster head involution defective protein (hid) mRNA, complete cds (3'UTR only)
 TGACAAAAAATAAAAAACGAAATCCATCGTGAACAGTTTTGTGTTTTTAAATCAGTTCTAAACACGAAAA
@@ -108,7 +108,7 @@ TTTGTCAACTCAATTTAAGAAACATTTCTGTTGTAGTTTAGTGATTGCTAGCAGAAAGCACTTTGTTTAA
 TTGTACATTTTATATTATGCTGTAATATTTTAATATACATAAATATCATTATTGATCTCATGAATATGTT
 CATAAGACAACAAAAATTATATATATGAATACATCTATGTGTATGTGTAAAG
 ```
-##### output (example)
+##### miRanda.output.txt (example)
 ```
    Forward:	Score: 167.000000  Q:2 to 20  R:3340 to 3360 Align Len (18) (83.33%) (94.44%)
 
@@ -132,14 +132,14 @@ psRobot_tar is designed to find potential small RNA targets
 ```
 psRobot_tar -s smRNA -t target -o smRNA-target.gTP.standard
 ```
-##### input file1: miRNA.fa
+##### input file1: psRobot.miRNA.fa
 ```
 >smRNA01
 TGACAGAAGAGAGTGAGCAC
 >smRNA02
 TGCCAAAGGAGATTTGCCCTG
 ```
-##### input file2: target_sequence.fa
+##### input file2: psRobot.target_sequence.fa
 ```
 >tar01
 GTGGGATACTGAGATACTGTTGGTATATTCTCTTCTTCTCCACCGAATATATCTTTGTCTTTGCCCTTTCCCCCTTCCTT
@@ -231,7 +231,7 @@ AAATGTGCAACATCCATTGCTCAAGCTAAACCAGTCACTCGGTTAGCTCAGCTTTTCTTATACATTTCCAAACATATTGT
 CAATTTCCTTCTGGATTCTGTTGGTATGACAACTTTGTTACTCTGTCAAACATGTCTACGACTATTTTAAAACCATTTCA
 GAGATTA
 ```
-##### output
+##### psRobot.output.txt
 
 Score: target penalty score, lower is better (0-5), default = 2.5
 
