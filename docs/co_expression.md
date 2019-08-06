@@ -24,9 +24,9 @@
 Import data
 
 ```r
-setwd("/Share/home/xixiaochen/project/training/")
-datExpr <- readRDS(file="/Share2/home/lulab/xixiaochen/training/co_expression/input_fpkm_matrix.rds")
-datTraits <- readRDS(file="/Share2/home/lulab/xixiaochen/training/co_expression/data_traits.rds")
+setwd("/Share2/home/lulab/xixiaochen/training_share2/co_expression/")
+datExpr <- readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/co_expression/input_fpkm_matrix.rds")
+datTraits <- readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/co_expression/data_traits.rds")
 ```
 
 Data character
@@ -149,7 +149,7 @@ sft=pickSoftThreshold(datExpr, powerVector = powers, verbose = 5)
 ```
 
 ```r
-pdf(file="/Share2/home/lulab/xixiaochen/training/co_expression/soft_thresholding.pdf",width=9, height=5)
+pdf(file="/Share2/home/lulab/xixiaochen/training_share2/co_expression/soft_thresholding.pdf",width=9, height=5)
 #Plot the results:
 par(mfrow = c(1,2))
 cex1 = 0.9
@@ -227,7 +227,7 @@ table(mergedColors)
 #         1671            37           279 
 
 #Plot the dendrogram and the module colors underneath
-pdf(file="/Share2/home/lulab/xixiaochen/training/co_expression/module_visualization.pdf",width=9, height=5)
+pdf(file="/Share2/home/lulab/xixiaochen/training_share2/co_expression/module_visualization.pdf",width=9, height=5)
 plotDendroAndColors(net$dendrograms[[1]], mergedColors[net$blockGenes[[1]]],
                     "Module colors",
                     dendroLabels = FALSE, hang = 0.03,
@@ -251,7 +251,7 @@ MEs = moduleEigengenes(datExpr, moduleColors)$eigengenes
 #Add the weight to existing module eigengenes
 MET = orderMEs(MEs)
 #Plot the relationships between the eigengenes and the trait
-pdf(file="/Share/home/xixiaochen/project/training/eigengenes_trait_relationship.pdf",width=7, height=9)
+pdf(file="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/eigengenes_trait_relationship.pdf",width=7, height=9)
 par(cex = 0.9)
 plotEigengeneNetworks(MET,"", marDendro=c(0,4,1,2), 
                       marHeatmap=c(3,4,1,2), cex.lab=0.8, xLabelsAngle=90)
@@ -279,7 +279,7 @@ MEs = orderMEs(MEs0)
 moduleTraitCor = cor(MEs, design, use = "p")
 moduleTraitPvalue = corPvalueStudent(moduleTraitCor, nSamples)
 
-pdf(file="/Share/home/xixiaochen/project/training/module_trait_relationship.pdf",width=9, height=10)
+pdf(file="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/module_trait_relationship.pdf",width=9, height=10)
 #Display the correlations and their p-values
 textMatrix = paste(signif(moduleTraitCor, 2), "\n(",
                    signif(moduleTraitPvalue, 1), ")", sep = "")
@@ -420,7 +420,7 @@ module = "brown"
 probes = colnames(datExpr)
 inModule = (moduleColors == module)
 modProbes = probes[inModule]
-write.table(modProbes,file="/Share/home/xixiaochen/project/training/geneID_brown.txt",sep="\t",quote=F,row.names=F,col.names=F)
+write.table(modProbes,file="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/geneID_brown.txt",sep="\t",quote=F,row.names=F,col.names=F)
 ```
 
 The output file looks like:
@@ -448,7 +448,7 @@ Library packages and load the input data
 
 ```r
 library(multtest)
-lnc_mRNA_dataExpr <- readRDS(file="/Share/home/xixiaochen/project/training/lnc_mRNA_dataExpr.rds")
+lnc_mRNA_dataExpr <- readRDS(file="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/lnc_mRNA_dataExpr.rds")
 ```
 
 The input file looks like:
@@ -495,15 +495,15 @@ Pcc_pvalue[1:4,1:4]
 ```
 
 ```r
-write.table(Pcc, file ="/Share/home/xixiaochen/project/training/pcc.txt", quote = F, row.names = F, sep="\t")
-write.table(Pcc_pvalue, file ="/Share/home/xixiaochen/project/training/pcc_pvalue.txt", quote = F,row.names = F, sep="\t")
+write.table(Pcc, file ="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/pcc.txt", quote = F, row.names = F, sep="\t")
+write.table(Pcc_pvalue, file ="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/pcc_pvalue.txt", quote = F,row.names = F, sep="\t")
 
 #Get the row and column names
 pcc_pvalue_colnames=colnames(Pcc_pvalue)
 pcc_pvalue_rownames=rownames(Pcc_pvalue)
 
-write.table(pcc_pvalue_colnames, file ="/Share/home/xixiaochen/project/training/Pcc_pvalue_colnames.txt", quote = F, row.names = F, sep="\t")
-write.table(pcc_pvalue_rownames, file ="/Share/home/xixiaochen/project/training/Pcc_pvalue_rownames.txt", quote = F, row.names = F, sep="\t")
+write.table(pcc_pvalue_colnames, file ="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/Pcc_pvalue_colnames.txt", quote = F, row.names = F, sep="\t")
+write.table(pcc_pvalue_rownames, file ="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/Pcc_pvalue_rownames.txt", quote = F, row.names = F, sep="\t")
 ```
 
 ```bash
@@ -515,7 +515,7 @@ sed -n '5198,19029p' pcc.txt | cut -f 1-5196 > lnc_coding_pcc.txt
 
 ```r
 #use the multtest package
-raw_pvalue = read.table("/Share/home/xixiaochen/project/training/lnc_coding_pvalue.txt", sep='\t', quote="", comment="")
+raw_pvalue = read.table("/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/lnc_coding_pvalue.txt", sep='\t', quote="", comment="")
 #The input file looks like
 dim(raw_pvalue)
 #[1] 13832  5196
@@ -532,7 +532,7 @@ raw_pvalue[1:4,1:4]
 
 ```r
 #Calculate the adjusted p-values
-setwd("/Share/home/xixiaochen/project/training/adjp/")
+setwd("/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/adjp/")
 #the multtest package: output=adjusted p-values from small to large order, index=original row and column information
 for (i in seq(1,dim(raw_pvalue)[2])){
   ad=mt.rawp2adjp(raw_pvalue[,i], proc=c("Bonferroni"))
@@ -558,7 +558,7 @@ the get\_gene\_pairs.py contains:
 import pandas as pd
 import numpy as np
 import os
-fold_path='/Share/home/xixiaochen/project/training/adjp/'
+fold_path='/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/adjp/'
 file_li=os.listdir(fold_path)
 adjp_fi_li=[]
 for i in range(len(file_li)):
@@ -575,8 +575,8 @@ fi_adjp=pd.DataFrame(adjp_fi_li)
 adjp_T=fi_adjp.T
 comp_adjp=adjp_T[adjp_T<0.01]
 #add gene names, each row represents a protein-coding gene, each column represents a lncRNA
-col_file='/Share/home/xixiaochen/project/training/Pcc_pvalue_colnames.txt'
-row_file='/Share/home/xixiaochen/project/training/Pcc_pvalue_rownames.txt'
+col_file='/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/Pcc_pvalue_colnames.txt'
+row_file='/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/Pcc_pvalue_rownames.txt'
 col=pd.read_csv(col_file)
 colnames=list(col['x'])[:5196]
 row=pd.read_csv(row_file)
@@ -600,7 +600,7 @@ def com_get_pair(df):
     df_df.columns=['coding genes','lncRNA','Pcc']
     return df_df
 #filter Pcc in top 5%
-pcc_file='/Share/home/xixiaochen/project/training/lnc_coding_pcc.txt'
+pcc_file='/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/lnc_coding_pcc.txt'
 pcc=pd.read_csv(pcc_file,sep='\t',header=None)
 #filter Pcc in bottom 5%
 pcc=abs(pcc)
@@ -612,9 +612,9 @@ cut_pcc=all_pcc_se.quantile(0.95)
 pcc_cut=pcc[pcc>cut_pcc]
 pcc_df=com_get_pair(pcc_cut)
 adjp_df=com_get_pair(comp_adjp)
-pcc_out_file='/Share/home/xixiaochen/project/training/pcc_cut.txt'
+pcc_out_file='/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/pcc_cut.txt'
 pcc_df.to_csv(pcc_out_file,sep='\t',index=False)
-adjp_out_file='/Share/home/xixiaochen/project/training/adjp_cut.txt'
+adjp_out_file='/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/adjp_cut.txt'
 adjp_df.to_csv(adjp_out_file,sep='\t',index=False)
 ```
 
