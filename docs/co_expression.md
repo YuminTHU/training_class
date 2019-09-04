@@ -448,16 +448,16 @@ Library packages and load the input data
 
 ```r
 library(multtest)
-lnc_mRNA_dataExpr <- readRDS(file="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/lnc_mRNA_dataExpr.rds")
+lnc_mRNA_dataExpr2 <- readRDS(file="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/lnc_mRNA_dataExpr2.rds")
 ```
 
 The input file looks like:
 
 ```r
-dim(lnc_mRNA_dataExpr)
-#[1]     6 19028
-#The input data contains 6 samples, 19028 genes (13832 protein coding genes, 5196 lncRNAs). 
-lnc_mRNA_dataExpr[1:4,1:4]
+dim(lnc_mRNA_dataExpr2)
+#[1]     6 2000
+#The input data contains 6 samples, 2000 genes (1500 protein coding genes, 500 lncRNAs). 
+lnc_mRNA_dataExpr2[1:4,1:4]
 #         ENSMUSG00000000031.16 ENSMUSG00000006462.6 ENSMUSG00000006638.14 ENSMUSG00000010492.10
 #Ctrl1Hip             0.0000000             0.249761              0.186874               0.120363
 #Ctrl2Hip             0.0510846             0.157029              0.221414               0.272098
@@ -470,13 +470,13 @@ Calculate the pearson correlation between every two genes.
 
 ```r
 #Calculate the pearson correlation
-Pcc = cor(lnc_mRNA_dataExpr, method = "pearson")
+Pcc = cor(lnc_mRNA_dataExpr2, method = "pearson")
 
 #Calculate the p-values of the pearson correlation
 Pcc_pvalue = corPvalueFisher(Pcc, 6, twoSided = TRUE)
 
 dim(Pcc)
-#[1] 19028 19028
+#[1] 2000 2000
 Pcc[1:4,1:4]
 #                      ENSMUSG00000000031.16 ENSMUSG00000006462.6 ENSMUSG00000006638.14 ENSMUSG00000010492.10
 #ENSMUSG00000000031.16            1.00000000            0.1619654            0.09256716            -0.4244842
@@ -485,7 +485,7 @@ Pcc[1:4,1:4]
 #ENSMUSG00000010492.10           -0.42448423           -0.5484968           -0.23970829             1.0000000
 
 dim(Pcc_pvalue)
-#[1] 19028 19028
+#[1] 2000 2000
 Pcc_pvalue[1:4,1:4]
 #                      ENSMUSG00000000031.16 ENSMUSG00000006462.6 ENSMUSG00000006638.14 ENSMUSG00000010492.10
 #ENSMUSG00000000031.16             0.0000000            0.7771578             0.8722577             0.4325254
@@ -495,44 +495,44 @@ Pcc_pvalue[1:4,1:4]
 ```
 
 ```r
-write.table(Pcc, file ="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/pcc.txt", quote = F, row.names = F, sep="\t")
-write.table(Pcc_pvalue, file ="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/pcc_pvalue.txt", quote = F,row.names = F, sep="\t")
+write.table(Pcc, file ="/Share2/home/lulab/xixiaochen/training_share2/co_expression/pcc.txt", quote = F, row.names = F, sep="\t")
+write.table(Pcc_pvalue, file ="/Share2/home/lulab/xixiaochen/training_share2/co_expression/pcc_pvalue.txt", quote = F,row.names = F, sep="\t")
 
 #Get the row and column names
 pcc_pvalue_colnames=colnames(Pcc_pvalue)
 pcc_pvalue_rownames=rownames(Pcc_pvalue)
 
-write.table(pcc_pvalue_colnames, file ="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/Pcc_pvalue_colnames.txt", quote = F, row.names = F, sep="\t")
-write.table(pcc_pvalue_rownames, file ="/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/Pcc_pvalue_rownames.txt", quote = F, row.names = F, sep="\t")
+write.table(pcc_pvalue_colnames, file ="/Share2/home/lulab/xixiaochen/training_share2/co_expression/Pcc_pvalue_colnames.txt", quote = F, row.names = F, sep="\t")
+write.table(pcc_pvalue_rownames, file ="/Share2/home/lulab/xixiaochen/training_share2/co_expression/Pcc_pvalue_rownames.txt", quote = F, row.names = F, sep="\t")
 ```
 
 ```bash
 #Bash Shell command:
 #Extract the "protein coding gene & lncRNA" gene-gene pairs
-sed -n '5198,19029p' pcc_pvalue.txt | cut -f 1-5196 > lnc_coding_pvalue.txt
-sed -n '5198,19029p' pcc.txt | cut -f 1-5196 > lnc_coding_pcc.txt
+sed -n '502,2001p' pcc_pvalue.txt | cut -f 1-500 > lnc_coding_pvalue.txt
+sed -n '502,2001p' pcc.txt | cut -f 1-500 > lnc_coding_pcc.txt
 ```
 
 ```r
 #use the multtest package
-raw_pvalue = read.table("/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/lnc_coding_pvalue.txt", sep='\t', quote="", comment="")
+raw_pvalue = read.table("/Share2/home/lulab/xixiaochen/training_share2/co_expression/lnc_coding_pvalue.txt", sep='\t', quote="", comment="")
 #The input file looks like
 dim(raw_pvalue)
-#[1] 13832  5196
+#[1] 1500  500
 raw_pvalue[1:4,1:4]
 #           V1        V2        V3        V4
-#1 0.001640119 0.9168501 0.8055079 0.4474872
-#2 0.950738858 0.7354926 0.2258995 0.6024823
-#3 0.217048270 0.3089962 0.9148814 0.1727689
-#4 0.280422327 0.5265067 0.8873198 0.8874673
-#19028 genes = 13832 protein coding genes, 5196 lncRNAs
+#1 0.4096710 0.396465705 0.2057436 0.80999264
+#2 0.6188956 0.004920709 0.6733839 0.20778508
+#3 0.5070725 0.931732205 0.7584698 0.66705000
+#4 0.9983747 0.465891803 0.3436047 0.03568696
+#2000 genes = 1500 protein coding genes, 500 lncRNAs
 #Each row represents a protein-coding gene, each column represents a lncRNA.
 #The row names are in the "Pcc_pvalue_rownames.txt" file, the column names are in the "Pcc_pvalue_colnames.txt".
 ```
 
 ```r
 #Calculate the adjusted p-values
-setwd("/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/adjp/")
+setwd("/Share2/home/lulab/xixiaochen/training_share2/co_expression/adjp/")
 #the multtest package: output=adjusted p-values from small to large order, index=original row and column information
 for (i in seq(1,dim(raw_pvalue)[2])){
   ad=mt.rawp2adjp(raw_pvalue[,i], proc=c("Bonferroni"))
@@ -544,7 +544,7 @@ for (i in seq(1,dim(raw_pvalue)[2])){
 }
 ```
 
-In the previous step, we will get 5196 files. In this step, process these file to get gene pairs with an adjusted P-value of 0.01 or less and with a Pcc value ranked in the top or bottom 0.05 percentile.
+In the previous step, we will get 500 files. In this step, process these file to get gene pairs with an adjusted P-value of 0.01 or less and with a Pcc value ranked in the top or bottom 0.05 percentile.
 
 ```bash
 #Bash Shell command:
@@ -558,7 +558,7 @@ the get\_gene\_pairs.py contains:
 import pandas as pd
 import numpy as np
 import os
-fold_path='/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/adjp/'
+fold_path='/Share2/home/lulab/xixiaochen/training_share2/co_expression/adjp/'
 file_li=os.listdir(fold_path)
 adjp_fi_li=[]
 for i in range(len(file_li)):
@@ -575,12 +575,12 @@ fi_adjp=pd.DataFrame(adjp_fi_li)
 adjp_T=fi_adjp.T
 comp_adjp=adjp_T[adjp_T<0.01]
 #add gene names, each row represents a protein-coding gene, each column represents a lncRNA
-col_file='/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/Pcc_pvalue_colnames.txt'
-row_file='/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/Pcc_pvalue_rownames.txt'
+col_file='/Share2/home/lulab/xixiaochen/training_share2/co_expression/Pcc_pvalue_colnames.txt'
+row_file='/Share2/home/lulab/xixiaochen/training_share2/co_expression/Pcc_pvalue_rownames.txt'
 col=pd.read_csv(col_file)
-colnames=list(col['x'])[:5196]
+colnames=list(col['x'])[:500]
 row=pd.read_csv(row_file)
-rownames=list(row['x'])[5196:]
+rownames=list(row['x'])[500:]
 def com_get_pair(df):
     df.columns=colnames
     df.index=rownames
@@ -600,7 +600,7 @@ def com_get_pair(df):
     df_df.columns=['coding genes','lncRNA','Pcc']
     return df_df
 #filter Pcc in top 5%
-pcc_file='/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/lnc_coding_pcc.txt'
+pcc_file='/Share2/home/lulab/xixiaochen/training_share2/co_expression/lnc_coding_pcc.txt'
 pcc=pd.read_csv(pcc_file,sep='\t',header=None)
 #filter Pcc in bottom 5%
 pcc=abs(pcc)
@@ -612,9 +612,9 @@ cut_pcc=all_pcc_se.quantile(0.95)
 pcc_cut=pcc[pcc>cut_pcc]
 pcc_df=com_get_pair(pcc_cut)
 adjp_df=com_get_pair(comp_adjp)
-pcc_out_file='/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/pcc_cut.txt'
+pcc_out_file='/Share2/home/lulab/xixiaochen/training_share2/co_expression/pcc_cut.txt'
 pcc_df.to_csv(pcc_out_file,sep='\t',index=False)
-adjp_out_file='/Share2/home/lulab/xixiaochen/Share/xixiaochen/project/training/adjp_cut.txt'
+adjp_out_file='/Share2/home/lulab/xixiaochen/training_share2/co_expression/adjp_cut.txt'
 adjp_df.to_csv(adjp_out_file,sep='\t',index=False)
 ```
 
@@ -667,18 +667,22 @@ The output files looks like:
 #Bash Shell command:
 head pcc_cut.txt
 #coding genes            lncRNA                    Pcc
-#ENSMUSG00000000001.4    ENSMUSG00000000031.16    0.94862751867
-#ENSMUSG00000000001.4    ENSMUSG00000021101.2    0.8694333061
-#ENSMUSG00000000001.4    ENSMUSG00000026729.9    0.892707684723
-#ENSMUSG00000000001.4    ENSMUSG00000039133.8    0.898846745918
+#ENSMUSG00000085431.7	ENSMUSG00000033015.16	1.0
+#ENSMUSG00000085431.7	ENSMUSG00000037910.2	1.0
+#ENSMUSG00000085431.7	ENSMUSG00000038152.4	0.898454912289789
+#ENSMUSG00000085431.7	ENSMUSG00000039545.15	0.940380543474745
+#ENSMUSG00000085431.7	ENSMUSG00000040657.3	1.0
+#ENSMUSG00000085431.7	ENSMUSG00000041674.16	0.8245987116435991
 #Each row show a protein-coding gene & lncRNA gene-gene pair, and their Pcc value.
 
 head adjp_cut.txt
 #coding genes            lncRNA                   Pcc
-#ENSMUSG00000000028.15    ENSMUSG00000104253.1    0.000538351806502
-#ENSMUSG00000000049.11    ENSMUSG00000103722.1    0.00527617332621
-#ENSMUSG00000000056.7    ENSMUSG00000108713.1    0.00562683857115
-#ENSMUSG00000000088.7    ENSMUSG00000066170.6    0.000297265644242
+#ENSMUSG00000085431.7	ENSMUSG00000033015.16	0.0
+#ENSMUSG00000085431.7	ENSMUSG00000037910.2	0.0
+#ENSMUSG00000085431.7	ENSMUSG00000040657.3	0.0
+#ENSMUSG00000085431.7	ENSMUSG00000055159.7	0.0
+#ENSMUSG00000085431.7	ENSMUSG00000073144.4	0.0
+#ENSMUSG00000085431.7	ENSMUSG00000073652.10	0.0048784147212109
 #Each row show a protein-coding gene & lncRNA gene-gene pair, and their adjusted p-value.
 ```
 
@@ -696,11 +700,12 @@ the output file looks like:
 ```bash
 head gene_pairs.txt 
 #mRNA                     lncRNA                  pcc               adjp
-#ENSMUSG00000000028.15    ENSMUSG00000104253.1    0.996498171575    0.000538351806502
-#ENSMUSG00000000049.11    ENSMUSG00000103722.1    0.994333869097    0.00527617332621
-#ENSMUSG00000000056.7     ENSMUSG00000108713.1    0.994253433918    0.00562683857115
-#ENSMUSG00000000088.7     ENSMUSG00000066170.6    0.996893343881    0.000297265644242
-#ENSMUSG00000000127.14    ENSMUSG00000111994.1    0.993846620005    0.0076734027363
+#ENSMUSG00000085431.7	ENSMUSG00000033015.16	1.0	0.0
+#ENSMUSG00000085431.7	ENSMUSG00000037910.2	1.0	0.0
+#ENSMUSG00000085431.7	ENSMUSG00000040657.3	1.0	0.0
+#ENSMUSG00000085431.7	ENSMUSG00000055159.7	1.0	0.0
+#ENSMUSG00000085431.7	ENSMUSG00000073144.4	1.0	0.0
+#ENSMUSG00000085431.7	ENSMUSG00000073652.10	0.9907736676388159	0.0048784147212109
 #Each row show a protein-coding gene & lncRNA gene-gene pair, and their Pcc value, adjusted p-value.
 ```
 
