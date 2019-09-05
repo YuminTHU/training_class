@@ -1,31 +1,31 @@
 ### licensed data
 
 ```
-/Share2/home/lulab1/TCGA_2019
+/Share2/home/lulab1/TCGA
 ```
 #### 1. miRNA-seq (bam file, hg38)
 miRNA-seq of these cancers: BRCA, COAD, ESCA, LIHC, LUAD, LUSC, PAAD, READ, STAD
 ```
-/Share2/home/lulab1/TCGA_2019/miRNA-Seq
+/Share2/home/lulab1/TCGA/miRNA-Seq
 ```
 
 #### 2. RNA-seq (bam file, hg38)
 RNA-seq of these cancers: BRCA, COAD, ESCA, LIHC, LUAD, LUSC, PAAD, READ, STAD
 ```
-/Share2/home/lulab1/TCGA_2019/RNA-Seq
+/Share2/home/lulab1/TCGA/RNA-Seq
 ```
 
 #### 3. TCGA-L3 (counts, FPKM, hg38)
 counts and fpkm of these cancers: BRCA, COAD, ESCA, LIHC, LUAD, LUSC, READ, STAD
 ```
-/Share2/home/lulab1/TCGA_2019/TCGA_L3
+/Share2/home/lulab1/TCGA/TCGA_L3
 ```
 
 
 ### public data
 
 ```
-/Share2/home/lulab1/CCLE_2014
+/Share2/home/lulab1/CCLE
 ```
 #### 1. CellLineAnnotation (tsv)
 Cell Line Annotations
