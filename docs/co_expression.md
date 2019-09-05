@@ -711,7 +711,15 @@ head gene_pairs.txt
 
 We could extract the mRNA gene set for GO/KEGG analysis.
 
-## 5.Reference
+### 5 Homework
+Inputdata:
+```bash
+/Share2/home/lulab/xixiaochen/training_share2/co_expression/homework_FemaleLiver-01-dataInput.RData
+134 samples, 3600 genes; each row represents a sample, each column represents a gene.
+```
+Please try to construct an automatic network and detect module (Choosing the soft-thresholding power, One-step network construction and module detection). Please plot two figures: 1.Analysis of network topology(Scale independence, Mean connectivity) for various soft-thresholding powers, 2.The dendrogram and the module colors underneath.
+
+## 6.Reference
 
 [https://github.com/jmzeng1314/my\_WGCNA](https://github.com/jmzeng1314/my_WGCNA)
 
