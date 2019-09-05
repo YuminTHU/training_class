@@ -30,11 +30,11 @@ Reference: [http://www.sthda.com/english/wiki/cox-proportional-hazards-model](ht
 Import data
 
 ```r
-setwd("/Share/home/xixiaochen/project/training/")
-rna = readRDS(file="/Share/home/xixiaochen/project/training/rna.rds")
+setwd("/Share2/home/lulab/xixiaochen/training_share2/survival_curve/")
+rna = readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/survival_curve/rna.rds")
 #if you don't want to normalize and scale expression data, just load data:
-#exp = readRDS(file="/Share/home/xixiaochen/project/training/exp.rds")
-clinical_info = readRDS(file="/Share/home/xixiaochen/project/training/clinical_info.rds")
+#exp = readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/survival_curve/exp.rds")
+clinical_info = readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/survival_curve/clinical_info.rds")
 ```
 
 Data character
@@ -157,7 +157,7 @@ dim(exp)
 #16897 genes, 313 samples
 
 #You could read this exp matrix from:
-#exp = readRDS(file="/Share/home/xixiaochen/project/training/exp.rds")
+#exp = readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/survival_curve/exp.rds")
 ```
 
 ### 3.Running steps
@@ -230,7 +230,7 @@ fit = survfit(Surv(new_death, death_event) ~ CCDC58, data = survplotdata)
 
 ```r
 #draw survival curves
-pdf(file="/Share/home/xixiaochen/project/training/CCDC58_LIHC.pdf")
+pdf(file="/Share2/home/lulab/xixiaochen/training_share2/survival_curve/CCDC58_LIHC.pdf")
 ggsurvplot(fit,
     risk.table = TRUE,
     pval = TRUE,
@@ -285,12 +285,12 @@ rna = rna[-remove,]
 table(substr(colnames(rna),14,14))
 #So we have 373 tumor and 50 normal
 #OR you could read this data from:
-#rna = readRDS(file="/Share/home/xixiaochen/project/training/rna.rds")
+#rna = readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/survival_curve/rna.rds")
 ####The following data processing steps are in the "2.3 Data preprocessing" part####
 ```
 
 ```r
-z_rna = readRDS(file="/Share/home/xixiaochen/project/training/z_rna.rds")
+z_rna = readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/survival_curve/z_rna.rds")
 #read the Clinical file, in this case i transposed it to keep the clinical feature title as column name
 clinical <- t(read.table('Clinical/LIHC.merged_only_clinical_clin_format.txt',header=T, row.names=1, sep='\t'))
 clinical = as.data.frame(clinical)
@@ -375,11 +375,21 @@ ind_clin = which(rownames(all_clin) %in% colnames(z_rna))
 clinical_info = all_clin[ind_clin,]
 
 #OR you could read this data from:
-#clinical_info = readRDS(file="/Share/home/xixiaochen/project/training/clinical_info.rds")
+#clinical_info = readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/survival_curve/clinical_info.rds")
 ####The following data processing steps are in the "2.3 Data preprocessing" part####
 ```
+### 5.Homework
+Please plot the survival curves about the patients with up-regulated differentially expressed and not altered expressed AFP gene in TCGA LIHC data. 
+```bash
+input files:
+exp = readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/survival_curve/exp.rds") #if you don't want to normalize and scale expression data, just load the exp.rds
+clinical_info = readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/survival_curve/clinical_info.rds")
+or 
+rna = readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/survival_curve/rna.rds")
+clinical_info = readRDS(file="/Share2/home/lulab/xixiaochen/training_share2/survival_curve/clinical_info.rds")
+```
 
-### 5.Reference
+### 6.Reference
 
 [https://www.biostars.org/p/153013/](https://www.biostars.org/p/153013/)
 
