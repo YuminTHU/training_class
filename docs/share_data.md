@@ -1,4 +1,4 @@
-### licensed data
+## licensed data
 Apply for access from NIH, get the signature of PI, and then you can obtain the data. 
 
 How to apply for access: https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=pi_requests
@@ -25,7 +25,7 @@ counts and fpkm of these cancers: BRCA, COAD, ESCA, LIHC, LUAD, LUSC, READ, STAD
 ```
 
 
-### public data
+## public data
 
 ```
 /Share2/home/lulab1/CCLE
