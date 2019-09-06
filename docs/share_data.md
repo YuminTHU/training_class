@@ -1,4 +1,7 @@
 ### licensed data
+Apply for access from NIH, get the signature of PI, and then you can obtain the data. 
+
+How to apply for access: https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?page=pi_requests
 
 ```
 /Share2/home/lulab1/TCGA
