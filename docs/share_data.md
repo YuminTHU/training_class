@@ -42,7 +42,7 @@ RNAseq profiling of 1019 cell lines
 /Share2/home/lulab1/CCLE/RNAseq_Raw
 ```
                 
-#### 3. mRNA expression Array 
+#### 3. mRNA expression Array (gct,res)
 Raw Affymetrix CEL files were converted to a single value for each probe set using Robust Multi-array Average (RMA) and normalized using quantile normalization
 ```
 /Share2/home/lulab1/CCLE/mRNAexpressionGeneExpression
