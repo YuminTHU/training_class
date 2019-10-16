@@ -195,7 +195,8 @@ script/Ribowave  \
 -b annotation_fly/final.ORFs \
 -o GSE52799/Ribowave \
 -n SRR1039770 \
--s script -p 8
+-s script \
+-p 8
 ```
 #### Identifying translated ORF
 ```
