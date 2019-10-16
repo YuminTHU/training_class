@@ -114,6 +114,7 @@ P-site directory, including :
 
 This step creats the P-site track for transcripts of interests using determined P-sites position from previous step.
 look at transcripts from chromosome X :
+
 **查看输出**
 ```
 script/create_track_Ribo.sh \
@@ -142,6 +143,7 @@ script/create_track_Ribo.sh \
 7. <scripts_dir> : the directory of all the scripts in the package
 
 **查看生成文件**
+
 ```#使用less命令查看psite文件
 $ cd /home/test/rna_regulation/ribo-wave/GSE52799/bedgraph/SRR1039770
 $ ls
