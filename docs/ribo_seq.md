@@ -27,7 +27,8 @@ R, bedtools v2.25.0
 reshape, ggplot2, rhdf5, methods, wmtsa, parallel
 
 ### Pre-processing
-[启动ribo-seq所用的docker](https://lulab2.gitbook.io/teaching/part-iii.-ngs-data-analyses/6.rna-regulation-analyses)
+[启动ribo-seq所用的docker](https://lulab2.gitbook.io/teaching/part-iii.-ngs-data-analyses/6.rna-regulation-analyses)（按照链接所示加载新的环境）
+
 启动新的docker环境
 ```
 docker load -i ~/Desktop/bioinfo_tsinghua_6.2_apa_6.3_ribo_6.4_structure.tar.gz
