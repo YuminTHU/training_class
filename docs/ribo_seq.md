@@ -3,7 +3,16 @@
 
 ## 背景介绍
 ### Ribo-seq原理
-Ribo-seq是2009年Weissman课题组首次发表的研究细胞内蛋白翻译图谱的新型二代测序技术，用来描述全基因组水平蛋白质的翻译情况。主要是选择性捕捉80S核糖体及其结合的RNA片段而定位核糖体所位于的RNA的位置。具体步骤为：在细胞裂解物中富集多聚核糖体（polysome）；将多聚核糖体用核酸酶（RNA nuclease）消化成单核糖体（monosome）；选择性的收集和富集80S核糖体并经纯化得到80S核糖体所保护的RNA片段。在此过程中，将80S核糖体保护的RNA片段进行下一步构建文库和测序（图1）。最后，通过生物信息学的分析获得细胞当前状态下的翻译图谱 。Ribo-seq数据测得的RNA片段长短与small RNA-seq相似，大约分布在25~35nt区间。由于Ribo-seq是特异性描述细胞的翻译组，因此其数据的测序片段大多比对到基因组的CDS区域（coding region）。此外，Ribo-seq还有一个明显区别于其他RNA-seq的特点，即Ribo-seq的序列在CDS区域往往呈现3-nt的周期性（图1）。这主要依赖于翻译过程中核糖体通常以3-nt的周期进行移动。
+Ribo-seq是2009年Weissman课题组首次发表的研究细胞内蛋白翻译图谱的新型二代测序技术，用来描述全基因组水平蛋白质的翻译情况。主要是**选择性捕捉80S核糖体及其结合的RNA片段而定位核糖体所位于的RNA的位置**。
+
+具体步骤为：
+* 在细胞裂解物中富集多聚核糖体（polysome）；
+* 将多聚核糖体用核酸酶（RNA nuclease）消化成单核糖体（monosome）
+* 选择性的收集和富集80S核糖体并经纯化得到80S核糖体所保护的RNA片段。
+* 在此过程中，将80S核糖体保护的RNA片段进行下一步构建文库和测序（图1）。
+* 最后，通过生物信息学的分析获得细胞当前状态下的翻译图谱 。
+
+Ribo-seq数据测得的RNA片段长短与small RNA-seq相似，大约分布在25~35nt区间。由于Ribo-seq是特异性描述细胞的翻译组，因此其数据的测序片段大多比对到基因组的CDS区域（coding region）。此外，Ribo-seq还有一个明显区别于其他RNA-seq的特点，即Ribo-seq的序列在CDS区域往往呈现3-nt的周期性（图1）。这主要依赖于翻译过程中核糖体通常以3-nt的周期进行移动。
 
 ![](../assets/Ribo_seq.F1.png)
 
@@ -18,10 +27,31 @@ R, bedtools v2.25.0
 reshape, ggplot2, rhdf5, methods, wmtsa, parallel
 
 ### Pre-processing
+[启动ribo-seq所用的docker](https://lulab2.gitbook.io/teaching/part-iii.-ngs-data-analyses/6.rna-regulation-analyses)
+启动新的docker环境
+```
+docker load -i ~/Desktop/bioinfo_tsinghua_6.2_apa_6.3_ribo_6.4_structure.tar.gz
+docker run —name=rnaregulation -dt -h bioinfo_docker —restart unless-stopped -v ~/Desktop/bioinfo_tsinghua_share:/home/test/share gangxu/bioinfo_tsinghua_6.2_apa_6.3_ribo_6.4_structure:latest
+docker exec -it rnaregulation bash
+```
+进入工作目录
+```
+cd /home/test/rna_regulation
+cd /home/test/rna_regulation/ribo-wave
+```
+
 #### 0. create annotation
 ```
-scripts/create_annotation.sh -G annotation_fly/dmel-all-r6.18.gtf -f annotation_fly/dmel-all-chromosome-r6.18.fasta  -o annotation_fly  -s scripts;
+# bedtools2没有添加到环境变量中，需要临时添加
+export PATH=$PATH:test@bioinfo_docker:~/software/bedtools2/bin
+# 运行annotation脚本（这一步时间会很久，生成文件已经提前跑好放在了annotation_fly目录下，可以跳过直接进行下一步）
+script/create_annotation.sh \
+-G annotation_fly/dmel-all-r6.18.gtf \
+-f annotation_fly/dmel-all-chromosome-r6.18.fasta  \
+-o annotation_fly  \
+-s script
 ```
+
 ##### input files
 1. <annotation.gtf> : the annotation gtf should contain start_codon and stop_codon information,eg: dmel-all-r6.18.gtf
 2. <genome.fasta> : genome fasta ,eg: dmel-all-chromosome-r6.18.fasta
@@ -38,7 +68,13 @@ annotation directory, including :
 
 This step determines the P-site position for each Ribo-seq reads length by overlapping with the annotated start codons from previous step
 ```
-scripts/P-site_determination.sh -i GSE52799/SRR1039770.sort.bam -S annotation_fly/start_codon.bed -o GSE52799 -n SRR1039770 -s scripts;
+# 运行P-site_determination.sh脚本
+script/P-site_determination.sh \
+-i GSE52799/SRR1039770.sort.bam \
+-S annotation_fly/start_codon.bed \
+-o GSE52799 \
+-n SRR1039770 \
+-s script;
 ```
 ##### input files
 1. <Ribo_bam> : secondary alignment removed to ensure one genomic position per aligned read and sorted
@@ -48,7 +84,18 @@ scripts/P-site_determination.sh -i GSE52799/SRR1039770.sort.bam -S annotation_fl
 4. <study_name> : the name of all the output file, default: test. eg: SRR1039770
 5. <scripts_dir>	: the directory of all the scripts in the package
 
+**查看输出**
+```
+$ cd /home/test/rna_regulation/ribo-wave/GSE52799/P-site
+$ ls
+SRR1039770.psite1nt.txt  SRR1039770.psite.pdf  SRR1039770.psite.txt
+#正常时输出这三个文件
+$ cp *pdf /home/test/share/
+# 拷贝pdf文件到容器与计算机互通的文件夹，可以用pdf阅读工具打开查看pdf
+```
+
 ##### output files
+
 P-site directory, including :
 1. name.psite1nt.txt : the Ribo-seq reads length and its corresponding P-sites position(= offset + 1). It may look this this :
 ```
@@ -66,8 +113,16 @@ P-site directory, including :
 
 This step creats the P-site track for transcripts of interests using determined P-sites position from previous step.
 look at transcripts from chromosome X :
+**查看输出**
 ```
-scripts/create_track_Ribo.sh -i GSE52799/SRR1039770.sort.bam -G annotation_fly/X.exons.gtf -g annotation_fly/genome -P GSE52799/P-site/SRR1039770.psite1nt.txt -o GSE52799 -n SRR1039770 -s scripts;
+script/create_track_Ribo.sh \
+-i GSE52799/SRR1039770.sort.bam \
+-G annotation_fly/X.exons.gtf \
+-g annotation_fly/genome \
+-P GSE52799/P-site/SRR1039770.psite1nt.txt \
+-o GSE52799 \
+-n SRR1039770 \
+-s script
 ```
 ##### input files
 1. <Ribo_bam>
@@ -84,6 +139,14 @@ scripts/create_track_Ribo.sh -i GSE52799/SRR1039770.sort.bam -G annotation_fly/X
 5. <out_dir> : the directory of the output result, eg: GSE52799
 6. <study_name> : the name of all the output file, default: test. eg: SRR1039770
 7. <scripts_dir> : the directory of all the scripts in the package
+
+**查看生成文件**
+```#使用less命令查看psite文件
+$ cd /home/test/rna_regulation/ribo-wave/GSE52799/bedgraph/SRR1039770
+$ ls
+final.psite
+$ less final.psite
+```
     
 ##### output files
 1. bedgraph/name directory, including :
@@ -124,36 +187,78 @@ It might take hours to perform the analysis if the input is large. It is recomme
 Run Ribowave on example:
 #### Denoise the P-site track
 ```
-mkdir -p Ribowave;
-scripts/Ribowave  -a GSE52799/bedgraph/SRR1039770/final.psite -b annotation_fly/final.ORFs -o GSE52799/Ribowave -n SRR1039770 -s scripts -p 8;
+# 在/home/test/rna_regulation/ribo-wave目录下
+mkdir -p /home/test/rna_regulation/ribo-wave/GSE52799/Ribowave
+script/Ribowave  \
+-a GSE52799/bedgraph/SRR1039770/final.psite \
+-b annotation_fly/final.ORFs \
+-o GSE52799/Ribowave \
+-n SRR1039770 \
+-s script -p 8
 ```
 #### Identifying translated ORF
 ```
-mkdir -p Ribowave;
-scripts/Ribowave -P -a GSE52799/bedgraph/SRR1039770/final.psite -b annotation_fly/final.ORFs -o GSE52799/Ribowave -n SRR1039770 -s scripts -p 8;
+mkdir -p /home/test/rna_regulation/ribo-wave/GSE52799/Ribowave
+script/Ribowave \
+-P \
+-a GSE52799/bedgraph/SRR1039770/final.psite \
+-b annotation_fly/final.ORFs \
+-o GSE52799/Ribowave \
+-n SRR1039770 \
+-s script \
+-p 8
 ```
 #### Estimating abundance
 ```
-mkdir -p Ribowave;
-scripts/Ribowave -D -a GSE52799/bedgraph/SRR1039770/final.psite -b annotation_fly/final.ORFs -o GSE52799/Ribowave -n SRR1039770 -s scripts -p 8;
+mkdir -p /home/test/rna_regulation/ribo-wave/GSE52799/Ribowave
+script/Ribowave \
+-D \
+-a GSE52799/bedgraph/SRR1039770/final.psite \
+-b annotation_fly/final.ORFs \
+-o GSE52799/Ribowave \
+-n SRR1039770 \
+-s script \
+-p 8
 ```
 #### Estimating TE
 IMPORTANT : when estimating TE, user should input the sequenced depth of Ribo-seq and the FPKM value from paired RNA-seq
 ```
-mkdir -p Ribowave;
-scripts/Ribowave -T 9012445  GSE52799/mRNA/SRR1039761.RPKM -a GSE52799/bedgraph/SRR1039770/final.psite -b annotation_fly/final.ORFs -o GSE52799/Ribowave -n SRR1039770 -s scripts -p 8;
+mkdir -p /home/test/rna_regulation/ribo-wave/GSE52799/Ribowave
+script/Ribowave \
+-T 9012445  GSE52799/mRNA/SRR1039761.RPKM \
+-a GSE52799/bedgraph/SRR1039770/final.psite \
+-b annotation_fly/final.ORFs \
+-o GSE52799/Ribowave \
+-n SRR1039770 \
+-s scripts \
+-p 8
 ```
 #### Calculating frameshift potential
 on annotated ORFs
 ```
-mkdir -p Ribowave;
+mkdir -p /home/test/rna_regulation/ribo-wave/GSE52799/Ribowave
 awk -F '\t' '$3=="anno"'  annotation_fly/final.ORFs  >   annotation_fly/aORF.ORFs;
-scripts/Ribowave -F -a GSE52799/bedgraph/SRR1039770/final.psite -b annotation_fly/aORF.ORFs -o GSE52799/Ribowave -n SRR1039770 -s scripts -p 8;
+script/Ribowave \
+-F \
+-a GSE52799/bedgraph/SRR1039770/final.psite \
+-b annotation_fly/aORF.ORFs \
+-o GSE52799/Ribowave \
+-n SRR1039770 \
+-s script \
+-p 8
 ```
 #### Multiple functions
 ```
-mkdir -p Ribowave;
-scripts/Ribowave -PD -T 9012445  GSE52799/mRNA/SRR1039761.RPKM -a GSE52799/bedgraph/SRR1039770/final.psite -b annotation_fly/final.ORFs -o GSE52799/Ribowave -n SRR1039770 -s scripts -p 8;
+mkdir -p /home/test/rna_regulation/ribo-wave/GSE52799/Ribowave
+script/Ribowave \
+-PD \
+-T 9012445  GSE52799/mRNA/SRR1039761.RPKM \
+-a GSE52799/bedgraph/SRR1039770/final.psite \
+-b annotation_fly/final.ORFs \
+-o GSE52799/Ribowave \
+-n SRR1039770 \
+-s script \
+-p 8
 ```
 
 ##### input files
