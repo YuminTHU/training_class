@@ -58,7 +58,7 @@ $ exit
 ```
 
 ---
-###### 1.2对基因组注释文件操作
+###### 1.2 对基因组注释文件操作
 ```bash
 mkdir -p /home/test/motif/sequence_motif/practice
 cd /home/test/motif/sequence_motif/practice
