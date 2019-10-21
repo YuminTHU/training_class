@@ -7,10 +7,10 @@ container: bioinfo_tsinghua
 fa文件、fa.fai文件、gtf文件、chrom.sizes文件和所需tar.gz文件从这里下载[清华大学云盘](https://cloud.tsinghua.edu.cn/d/8bf3e363bae145c69469/)
 
 ---
+#### running steps
 
-
-#### 1. get UTR or promoter sequence
-##### 1.1 install R package GenomicFeatures and biozhuoer tools (cnode)
+##### 1. get UTR or promoter sequence
+###### 1.1 install R package GenomicFeatures and biozhuoer tools (cnode)
 ---
 需要用root权限进入container bioinfo_tsinghua
 
@@ -58,7 +58,7 @@ $ exit
 ```
 
 ---
-对基因组注释文件操作
+###### 1.2对基因组注释文件操作
 ```bash
 mkdir -p /home/test/motif/sequence_motif/practice
 cd /home/test/motif/sequence_motif/practice
@@ -89,7 +89,7 @@ In .get_cds_IDX(type, phase) :
 ```
 
 ---
- get 3'UTR & 5'UTR site range
+###### 1.3 get 3'UTR & 5'UTR site range
 
 ```r
 # 继续操作
@@ -138,12 +138,12 @@ test@1a8b4fa42d00:~/motif/sequence_motif/practice$
 ```
 
 ---
-#### 2. intersect with interested genes
+##### 2. intersect with interested genes
 
 回到bash下对刚刚这几个文件进行进一步加工，获取我们想要的信息
 
 ---
- interested 3'UTR
+###### 2.1 interested 3'UTR
 
 ```bash
 sort -t $'\t' -k 2 utr3p.info|join -o 1.3 2.1 1.2 1.9 1.4 1.5 1.6 1.7 1.8 1.10 -t $'\t' -1 2 -2 2 - \
@@ -172,7 +172,7 @@ column9: exon_id
 column10: exon_rank
 ```
 
-#### interested promoter
+###### 2.2 interested promoter
 同理再试一次，这次获取感兴趣的promoter信息，尝试思考每个命令的含义
 ```bash
 sort -t $'\t' -k 7 promoter.info|join -o 1.1 2.1 1.7 1.2  1.3 1.4 1.5 1.6 -t $'\t' -1 7 -2 2 - \
@@ -197,10 +197,10 @@ column8: transprict_id
 
 ---
 
-#### 3. convert to bed format
+##### 3. convert to bed format
 
 ---
-3'UTR bed info
+###### 3.1 'UTR bed info
 
 ```bash
 cat interested_three_prime_UTR.info | \
@@ -219,7 +219,7 @@ column5: transcript
 column6: strand
 ```
 
-#### promoter bed info
+###### 3.2 promoter bed info
 
 ```bash
 cat interested_promoter.info | \
@@ -239,7 +239,7 @@ column6: strand
 ```
 
 ---
-#### 4. get genome sequence
+##### 4. get genome sequence
 
 ---
 
@@ -249,7 +249,7 @@ column6: strand
 apt-get install bedtools
 # 退出docker
 ```
-#### get 3'UTR related genome sequence
+###### 4.1 get 3'UTR related genome sequence
 以test身份进入docker容器
 
 ```bash
@@ -261,7 +261,7 @@ bedtools getfasta -s -name -fi ../genome/GRCh38.p10.genome.fa \
 less interested_three_prime_UTR.fa
 ```
 
-#### concatenate sequences of the same 3’ UTR
+###### 4.2 concatenate sequences of the same 3’ UTR
 
 ```r
 # R环境下
@@ -278,7 +278,7 @@ concatenate_seq('interested_three_prime_UTR.fa')
 less interested_three_prime_UTR.fa
 ```
 
-#### get promoter related genome sequence
+###### 4.3 get promoter related genome sequence
 
 ```bash
 # 回到bash
@@ -286,7 +286,7 @@ bedtools getfasta -s -name -fi ../genome/GRCh38.p10.genome.fa \
   -bed interested_promoter.bed -fo interested_promoter.fa
 ```
 
-#### concatenate sequences of the same promoter
+###### 4.4 concatenate sequences of the same promoter
 
 ```r
 library(dplyr)
@@ -295,7 +295,7 @@ concatenate_seq('interested_promoter.fa')
 ```
 
 
-#### 5. generate random sequence as background sequence
+##### 5. generate random sequence as background sequence
 **MEME安装**
 root用户进入容器
 ```bash
@@ -317,7 +317,7 @@ export PATH=$PATH:/home/test/software/MEME/meme/libexec/meme-5.1.0
 ```
 there are three mothods to get random sequence: 1. shuffle the input sequence 2. downsteam 1000bp 3. bedtools shuffle
 
-#### shuffle the input sequence
+###### 5.1 shuffle the input sequence
 需要按照上述方法安装MEME
 ```bash
 /home/test/motif/sequence_motif/practice
@@ -330,7 +330,7 @@ interested_promoter.fa \
 interested_promoter.control
 ```
 
-#### downstream 1000bp as bg
+###### 5.2 downstream 1000bp as bg
 
 [https://dongzhuoer.github.io/diff\_exp\_2018\_zhuoer/motif.html](https://dongzhuoer.github.io/diff_exp_2018_zhuoer/motif.html)
 
@@ -360,7 +360,7 @@ slide('interested_promoter.bed', 'interested_promoter_downstream.bed')
 
 repeat get promoter and get 3'UTR section
 
-#### bedtools shuffle
+###### 5.3 bedtools shuffle
 ```bash
 bedtools shuffle -i interested_three_prime_UTR.bed \
 -g ../genome/hg38.chrom.sizes >interested_three_prime_UTR_btools.bed
@@ -373,10 +373,10 @@ repeat get promoter and get 3'UTR section
 
 ---
 
-#### 6. motif enrichment
+##### 6. motif enrichment
 
 ---
-de novo motif discovery
+###### 6.1 de novo motif discovery
 test用户进入容器
 ```bash
 cd /home/test/motif/sequence_motif/practice/
@@ -394,7 +394,8 @@ output
 
 ![](../assets/sequence_meme.png)
 
- known motif enrichment
+---
+###### 6.2 known motif enrichment
 
 1. download known motif from meme
 2. add de novo motif file by meme
@@ -427,6 +428,6 @@ interested_promoter.fa \
 
 ![](../assets/sequence_ame.png)
 
-Homework
+#### Homework
 1. 理解“concatenate sequences of the same 3'UTR”的含义，并找出一个具体的gene的3’UTR当做例子，解释这一步实现的效果。
 2. 自己写一个脚本实现“concatenate sequences of the same 3'UTR”这一步，并以上面找到的具体gene的3'UTR当做示例，展示输入文件，输出文件，及运行脚本。
