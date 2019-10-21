@@ -1,99 +1,111 @@
 ## structure motif analysis
-### workflow
+### 1) workflow
 ![](../assets/structure_motif.pipeline.png)
 
-### 0. get interested sequence and control sequence as sequence motif analysis
-### 1.BEAM
+---
+如果你学习完了Sequence Motif，那么本节所需文件就在你的docker bioinfo_tsinghua容器的`/home/test/motif/structure_motif/`目录下，如果没学上面的小节，你也可以按照这个目录自己放置文件，源文件在这里[清华大学云盘](https://cloud.tsinghua.edu.cn/d/8bf3e363bae145c69469/)文件名为`example_motif.tar.gz`
+
+---
+### 2) running steps
+
+**BEAM与RNAfold的安装配置**
+root下,bioinfo_tsinghua container
+[清华大学云盘](https://cloud.tsinghua.edu.cn/d/8bf3e363bae145c69469/)下载`BEAREncoder.tar.gz`放在share文件夹中
+```bash
+# BEAM的配置，待完善
+docker exec -it -u root bioinfo_tsinghua bash
+mkdir /home/test/software/BEAM
+cd /home/test/software/BEAM
+wget https://github.com/noise42/beam/archive/v2.0.tar.gz
+tar -zxvf v2.0.tar.gz
+cd beam-2.0/
+cp ~/share/BEAREncoder.tar.gz ./
+tar -zxvf BEAREncoder.tar.gz
+# RNAfold的配置
+mkdir /home/test/software/ViennaRNA
+wget https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_4_x/ViennaRNA-2.4.14.tar.gz
+tar -zxvf ViennaRNA-2.4.14.tar.gz
+cd ViennaRNA-2.4.14
+mkdir /home/test/software/ViennaRNA/ViennaRNA
+./configure --prefix=/home/test/software/ViennaRNA/ViennaRNA
+make
+make install
+```
+
+---
+#### (1) get interested sequence and control sequence as sequence motif analysis
+##### 1.1 BEAM
 http://beam.uniroma2.it/home
-#### 1.1 Use RNAfold to get dot-bracket
+
+test身份进入容器
+```bash
+# 在这个路径下已经准备了练习文件
+/home/test/motif/structure_motif/BEAM
+cd /home/test/motif/structure_motif/BEAM
+```
+
+
+##### 1.2 Use RNAfold to get dot-bracket
 Compute the best (MFE) structure for this sequence (primary sequence with dot-bracket)
-```
+```bash
 RNAfold <test.fa >dot.fa
+less dot.fa
+# 查看生成的序列及点括号文件dot.fa
 ```
-#### 1.2 Get file with BEAR notation ---> fastB (fastBEAR).
+
+##### 1.3 Get file with BEAR notation ---> fastB (fastBEAR).
+
+::这一步有问题待解决::
+
 ```
 awk '/^>/ {print; getline; print; getline; print $1}' dot.fa >dot_to_encode.fa
 java -jar /BioII/lulab_b/songyabing/motif_analysis/software/BEAM/beam-2.0/BearEncoder.new.jar dot_to_encode.fa BEAMready.fa
 ```
-#### 1.3 get structure motifs
+
+##### 1.4 get structure motifs
 ```
 java -jar /BioII/lulab_b/songyabing/motif_analysis/software/BEAM/beam-2.0/BEAM_release1.6.1.jar -f BEAMready.fa -w 10 -W 40 -M 3 
 ```
-#### 1.4 visualize motifs with weblogo
-##### 1.4.1 install weblogo
-```
+
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g85tflwz2qj30pw0citaq.jpg)
+
+##### 1.5 visualize motifs with weblogo
+###### 1.5.1 install weblogo
+
+---
+**install weblogo**
+root身份登录容器
+```bash
 pip install weblogo
 ```
-##### 1.4.2 visualize structure motifs
-```
+
+###### 1.5.2 visualize structure motifs
+
+---
+test用户
+```bash
+cd /home/test/motif/structure_motif/BEAM/risultati/BEAMready/webLogoOut/motifs
 weblogo -a 'ZAQXSWCDEVFRBGTNHY' -f BEAMready_m1_run1_wl.fa -D fasta \
 -o out.jpeg -F jpeg --composition="none" \
 -C red ZAQ 'Stem' -C blue XSW 'Loop' -C forestgreen CDE 'InternalLoop' \
 -C orange VFR 'StemBranch' -C DarkOrange B 'Bulge' \
 -C lime G 'BulgeBranch' -C purple T 'Branching' \
 -C limegreen NHY 'InternalLoopBranch'
+cp p out.jpeg ~/share/
+# 进入share文件夹查看输出结果
 ```
-#### 1.4.3 example output
-![](../assets/structure_motif.BEAM.png)
 
-### 2. RNApromo
-#### 2.1 download
+
+
+###### 1.4.3 example output
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g85thyjml0j30ok08sgo9.jpg)
+
+
+
+### 3) other tools 
+#### 3.1 RNApromo
 https://genie.weizmann.ac.il/pubs/rnamotifs08/64bit_exe_rnamotifs08_motif_finder.tar.gz
-#### 2.2 predict structure motifs
-```
-rnamotifs08_motif_finder.pl -positive_seq input_pos_seq.fa -output_dir Output
-```
-##### input
-Positive sequences - a fasta format file containing the sequences to predict motifs on.
-```
->Pos_1
-ATAAGAGACCACAAGCGACCCGCAGGGCCAGACGTTCTTCGCCGAGAGTCGTCGGGGTTTCCTGCTTCAACAGTGCTTGGACGGAACCCGGCGCTCGTTCCCCACCCCGGCCGGCCGCCCATAGCCAGCCCTCCGTCACCTCTTCACCGCACCCTCGGACTGCCCCAAGGCCCCCGCCGCCGCTCCA
-```
-##### example output
-![](../assets/structure_motif.RNApromo.png)
-
-#### 2.3 find known motifs
-After learning a motif, you can search a database of sequences to find positions that match the motif you learned. To do that you need to first match a secondary structure to each of the input sequences in your database, either using existing structure prediction algorithms, or using some other information.
-#### 2.3.1 Produce a likelihood score for each sequence in the database.
-```
-rnamotifs08_motif_match.pl database.tab -cm model.cm
-```
-##### input
-The database is then specified in the following format: <id> <sequence> <structure>
-database.tab
-```
-seq_1	AUAAGAGACCACAAGCGACCCGCAGGGCCAGACGUUCUUCGCCGAGAGUCGUCGGGGUUUCCUGCUUCAACAGUGCUUGGACGGAACCCGGCGCUCGUUCCCCACCCCGGCCGGCCGCCCAUAGCCAGCCCUCCGUCACCUCUUCACCGCACCCUCGGACUGCCCCAAGGCCCCCGCCGCCGCUCCA	.............((((..(.((.(((((.(((((((((....))))).))))(((((.((((((...(((((((((.((......)).)))))).))).........(((.(((........))).)))..................))).....)))..)))))..)))))..)).).))))...
-```
-##### output
-```
-seq_2:0    19.7698
-seq_7:0    19.3706
-seq_3:0    19.1064
-seq_1:0    18.073
-seq_5:0    16.5508
-seq_9:0    14.5906
-seq_4:0    10.3685
-seq_10:0   9.15077
-seq_6:0    6.81294
-seq_8:0    0.233537
-```
-#### 2.3.2 Produce a likelihood score for the best motif position in each sequence in the database, and the position itself.
-##### output
-```
-seq_2:0    19.7698    33      48      UUCAACAGUGUUUGGA        (((((......)))))        <<<<<,,,,,,>>>>>
-seq_7:0    19.3706    104     119     GGGAGCAGUGUCUUCC        (((((......)))))        <<<<<,,,,,,>>>>>
-seq_3:0    19.1064    16      31      GUCCUCAGUGCAGGGC        (((((......)))))        <<<<<,,,,,,>>>>>
-seq_1:0    18.073     30      52      GACGUUCUUCGCCGAGAGUCGUC (((((((((....))))).)))) <<<<<<<<<,--->>>>>,>>>>
-seq_5:0    16.5508    104     119     AGCUACAGUGUUAGCU        (((((......)))))        <<<<<,,,,,,>>>>>
-seq_9:0    14.5906    32      47      GAGCCAGUGUGUUUCU        ((((......))))..        <<<-,,,,,,->>>,,
-seq_4:0    10.3685    7       21      UUGUCAGUGCACAAA         ((((......)))).         <<<<,,,,,,>>>>,
-seq_10:0   9.15077    133     152     CAACCUCCACCUUCUGGGUU    .(((((.........)))))    ,<----,,,,,,,,,---->
-seq_6:0    6.81294    1       16      UAUGGAGAUUUCCAUA        (((((......)))))        <<<<<,,,,,,>>>>>
-seq_8:0    0.233537   95      115     ACACCCCAGCCCUGCAGUGUA   ((((..((....))..)))).   <<<<,,--,,,,---->>>>,
-```
-
-### 3. other tools 
-#### 3.1 GraphProt:modelling binding preferences of RNA-binding proteins
+#### 3.2 GraphProt:modelling binding preferences of RNA-binding proteins
 https://github.com/dmaticzka/GraphProt
-#### 3.2 RNAcontext: A New Method for Learning the Sequence and Structure Binding Preferences of RNA-Binding Proteins
+#### 3.3 RNAcontext: A New Method for Learning the Sequence and Structure Binding Preferences of RNA-Binding Proteins
 http://www.cs.toronto.edu/~hilal/rnacontext/
