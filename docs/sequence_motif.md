@@ -2,23 +2,19 @@
 ### 1) workflow
 ![](../assets/seq_motif.pipeline.png)
 
----
 container: bioinfo_tsinghua
 fa文件、fa.fai文件、gtf文件、chrom.sizes文件和所需tar.gz文件从这里下载[清华大学云盘](https://cloud.tsinghua.edu.cn/d/8bf3e363bae145c69469/)
 
----
 ### 2)running steps
 
 #### (1) get UTR or promoter sequence
 ##### 1.1 install R package GenomicFeatures and biozhuoer tools (cnode)
----
 需要用root权限进入container bioinfo_tsinghua
 
 GenomicFeatures package used to extract needed sequence/提取所需序列
 
 biozhuoer tools used to concat sequences of the same UTR or promoter/用于连接序列（具有相同UTR或启动子的序列）
 
----
 **将所需文件放在相应位置**
 ```bash
 # 将下载好的gtf文件和tar.gz文件放在share文件夹中
@@ -35,7 +31,7 @@ cp ~/share/hg38.chrom.sizes ./
 # 退出容器
 exit
 ```
----
+
 **配置所需环境**
 To install this package, start R (my R version is “3.5.1”) and enter:
 ```bash
@@ -57,7 +53,6 @@ $ exit
 # 首次进行Sequence Motif分析的时候需要运行上面命令来安装和更新package，再次使用就不需要了
 ```
 
----
 ##### 1.2 对基因组注释文件操作/generate txdb object
 ```bash
 mkdir -p /home/test/motif/sequence_motif/practice
@@ -86,7 +81,6 @@ In .get_cds_IDX(type, phase) :
 >
 ```
 
----
 ##### 1.3 get 3'UTR & 5'UTR site range
 
 ```r
@@ -108,7 +102,6 @@ utr3p.info  utr5p.info
 这样就获取了5’UTR or 3’UTR的位置信息，如下图
 ![](https://tva1.sinaimg.cn/large/006y8mN6ly1g85qz19ilzj319e0eaq6i.jpg)
 
----
 get promoter site range
 同样的操作获得promoter的位置信息
 
@@ -135,12 +128,10 @@ promoter.info  utr3p.info  utr5p.info
 test@1a8b4fa42d00:~/motif/sequence_motif/practice$
 ```
 
----
 #### (2) intersect with interested genes
 
 回到bash下对刚刚这几个文件进行进一步加工，获取我们想要的信息
 
----
 ##### 2.1 interested 3'UTR
 
 ```bash
@@ -193,11 +184,9 @@ column7: strand
 column8: transprict_id
 ```
 
----
 
 #### (3) convert to bed format
 
----
 ##### 3.1 'UTR bed info
 
 ```bash
@@ -236,10 +225,8 @@ column5: transcript
 column6: strand
 ```
 
----
 #### (4) get genome sequence
 
----
 
 **安装bedtools**
 **使用docker的root用户进入容器（前面介绍如何使用root身份了）
@@ -369,11 +356,9 @@ bedtools shuffle -i interested_promoter.bed \
 
 repeat get promoter and get 3'UTR section
 
----
 
 #### (6) motif enrichment
 
----
 ##### 6.1 de novo motif discovery
 test用户进入容器
 ```bash
@@ -392,7 +377,6 @@ output
 
 ![](../assets/sequence_meme.png)
 
----
 ##### 6.2 known motif enrichment
 
 1. download known motif from meme
