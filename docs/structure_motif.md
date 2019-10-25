@@ -19,8 +19,7 @@ cd /home/test/software/BEAM
 wget https://github.com/noise42/beam/archive/v2.0.tar.gz
 tar -zxvf v2.0.tar.gz
 cd beam-2.0/
-cp ~/share/BEAREncoder.tar.gz ./
-tar -zxvf BEAREncoder.tar.gz
+cp ~/share/BearEncoder.new.jar ./
 # RNAfold的配置
 mkdir /home/test/software/ViennaRNA
 wget https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_4_x/ViennaRNA-2.4.14.tar.gz
@@ -55,11 +54,10 @@ less dot.fa
 
 ##### 1.3 Get file with BEAR notation ---> fastB (fastBEAR).
 
-::这一步有问题待解决::
 
 ```
 awk '/^>/ {print; getline; print; getline; print $1}' dot.fa >dot_to_encode.fa
-java -jar /BioII/lulab_b/songyabing/motif_analysis/software/BEAM/beam-2.0/BearEncoder.new.jar dot_to_encode.fa BEAMready.fa
+java -jar /home/test/software/BEAM/beam-2.0/BearEncoder.new.jar dot_to_encode.fa BEAMready.fa
 ```
 
 ##### 1.4 get structure motifs
