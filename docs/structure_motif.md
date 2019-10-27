@@ -89,7 +89,7 @@ weblogo -a 'ZAQXSWCDEVFRBGTNHY' -f BEAMready_m1_run1_wl.fa -D fasta \
 -C orange VFR 'StemBranch' -C DarkOrange B 'Bulge' \
 -C lime G 'BulgeBranch' -C purple T 'Branching' \
 -C limegreen NHY 'InternalLoopBranch'
-cp p out.jpeg ~/share/
+cp -p out.jpeg ~/share/
 # 进入share文件夹查看输出结果
 ```
 
