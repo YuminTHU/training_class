@@ -62,7 +62,7 @@ java -jar /home/test/software/BEAM/beam-2.0/BearEncoder.new.jar dot_to_encode.fa
 
 ##### 1.4 get structure motifs
 ```
-java -jar /BioII/lulab_b/songyabing/motif_analysis/software/BEAM/beam-2.0/BEAM_release1.6.1.jar -f BEAMready.fa -w 10 -W 40 -M 3 
+java -jar /home/test/software/BEAM/beam-2.0/BEAM_release_1.5.1.jar -f BEAMready.fa -w 10 -W 40 -M 3 
 ```
 
 ![](https://tva1.sinaimg.cn/large/006y8mN6ly1g85tflwz2qj30pw0citaq.jpg)
