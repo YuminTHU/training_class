@@ -65,7 +65,7 @@ echo 2.MarkDuplicates end `date`
 
 ​    由于RNA测序得到的reads中的一部分可能会跨越不同的exon，对于这些reads的CIGAR表达式中会出现`N`值。使用GATK中的SplitNCigarReads功能将这种reads切分为k+1个reads（K为CIGAR中的`N`的数量）
 
-![CIGAR](.\CIGAR.png)
+![](../assets/SNP.png)
 
 
 
