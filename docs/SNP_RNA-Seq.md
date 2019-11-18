@@ -118,7 +118,7 @@ echo 4.HaplotypeCaller end `date`
 
 #### (5) VariantFiltration
 
-我们可以根据变异的聚集程度、变异的链偏向性、变异的平均质量水平、位点测序深度等指标进行过滤。
+我们可以根据变异的聚集程度、变异的链偏好性、变异的平均质量水平、位点测序深度等指标进行过滤。
 
 ```bash
 echo 5.VariantFiltration start `date`
