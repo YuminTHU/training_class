@@ -11,6 +11,7 @@ STAR在运行时候占用机器的内存较大，一般可达到20~30G，因此�
 
 
 > [STAR的Github主页](https://github.com/alexdobin/STAR)
+>
 > 参考文献： **Alexander Dobin**, et al. [STAR: ultrafast universal RNA-seq aligner](https://academic.oup.com/bioinformatics/article/29/1/15/272537) _Bioinformatics_. 2012. 29(1): 15-21.
 
 #### (2) GATK
@@ -18,7 +19,9 @@ STAR在运行时候占用机器的内存较大，一般可达到20~30G，因此�
 GATK是Broad Institute开发的一款用于检测变异（SNP/INDEL）的软件，拥有较高的引用率（已有上万次引用）。
 
 > [GATK的主页](https://software.broadinstitute.org/gatk/)
+>
 > [GATK Forum](https://gatkforums.broadinstitute.org/gatk/) （GATK开发人员与在该论坛回答用户疑问）
+>
 > 参考文献：**Aaron McKenna**, et al. [The Genome Analysis Toolkit: A MapReduce framework for analyzing next-generation DNA sequencing data.](https://genome.cshlp.org/content/20/9/1297.long) _Genome Research_. 2010. 20: 1297-1303.
 
 #### (3) ANNOVAR
