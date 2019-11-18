@@ -144,7 +144,7 @@ echo 5.VariantFiltration end `date`
 
 `--window 35 \ --cluster3` :  （变异的聚集程度）if there are more than 3 variants cluster in 35 bp window, these variants will be filtered.
 
-`--filter-name 'FS' \ --filter 'FS > 30.0' `:  （[变异的链偏向性](https://gatkforums.broadinstitute.org/gatk/discussion/8056/fisher-s-exact-test)）Phred-scaled p-value （-log10(p-value) ） using Fisher's exact test to detect strand bias. Phred-score closer to 0 means there is a lower chance of there being bias. Higher FS values therefore indicate more bias.
+`--filter-name 'FS' \ --filter 'FS > 30.0' `:  （[变异的链偏好性（strand bias）](https://gatkforums.broadinstitute.org/gatk/discussion/8056/fisher-s-exact-test)）Phred-scaled p-value （-log10(p-value) ） using Fisher's exact test to detect strand bias. Phred-score closer to 0 means there is a lower chance of there being bias. Higher FS values therefore indicate more bias.
 
 `--filter-name 'QD'`: （变异的平均质量水平）Variant Confidence/Quality by Depth.   
 
@@ -154,7 +154,8 @@ echo 5.VariantFiltration end `date`
 
 `--filter-name`中的过滤参数的具体含义可以参考GATK生成的VCF文件中开头的注释部分。用户可以根据VCF文件中出现的其他指标对变异进行更多样的过滤筛选。
 
-值得指出的是，满足用户所设置的过滤表达式（如平均质量QD低于2: `--filter 'QD < 2.0'`）的变异才是我们需要过滤的变异。这些需要被过滤的“不合格”变异仍然会被保留在VCF文件中，但是在VCF第6列 `QUAL`中会被标注过滤的原因（平均质量QD太低，则标记为`QD`），通过筛选标注的、合格的变异位点会被标记`PASS`，我们可以用`awk`等命令过滤掉不合格变异，保留合格变异。
+值得指出的是，满足用户所设置的过滤表达式（如平均质量QD低于2: `--filter 'QD < 2.0'`）的变异才是我们需要过滤的变异。这些需要被过滤的“不合格”变异仍然会被保留在VCF文件中，但是在VCF第6列 `QUAL`中会被标注过滤的原因（平均质量QD太低，则标记为`QD`），通过筛选的、合格的变异位点会被标记`PASS`。
+我们可以用`awk`等命令去除VCF中不合格变异，保留合格变异。
  
 
 #### (6) Annotation
