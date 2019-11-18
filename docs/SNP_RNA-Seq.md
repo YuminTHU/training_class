@@ -1,4 +1,4 @@
-### SNP analysis of RNA-Seq
+### SNP analysis in RNA-Seq
 ### 1) Introduction
 
 本示例使用STAR将RNA测序数据比对到参考基因组后，使用GATK(4.0以上版本)进行SNP/INDEL的检测，最后使用ANNOVAR对SNP/INDEL进行注释。
