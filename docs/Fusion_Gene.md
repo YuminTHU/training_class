@@ -19,8 +19,8 @@ docker pull trinityctat/starfusion
 ```
 在本示例中，我们使用STAR-Fusion的Docker镜像进行分析。如果您不使用Docker镜像而是自行安装，请查看[STAR-Fusion的安装指南](https://github.com/STAR-Fusion/STAR-Fusion/wiki/installing-star-fusion)。
 
-> [STAR-Fusion的GitHub主页](https://github.com/STAR-Fusion/STAR-Fusion/wiki) 有详细的软件使用方法说明
->
+- [STAR-Fusion的GitHub主页](https://github.com/STAR-Fusion/STAR-Fusion/wiki) 有详细的软件使用方法说明
+
 > **Brian J. Haas**, et al. [STAR-Fusion: Fast and Accurate Fusion Transcript Detection from RNA-Seq.](https://www.biorxiv.org/content/10.1101/120295v1) **bioRxiv**, 2017.
 
 
