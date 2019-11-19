@@ -63,7 +63,7 @@ echo alignment end `date`
 
 #### (2) MarkDuplicates
 
-在建库的PCR过程中会形成一些重复的DNA/cDNA片段序列，这些重复序列被称为PCR duplicates。另外，在测序仪进行光学测量时候，也会形成一些光学重复，optical duplicates。如果变异位点位于这些重复的序列中，可能导致变异频率偏高，因此需要对重复序列进行标记，使得后续变异检测软件可以识别这些重复序列。
+在建库的PCR过程中会形成一些重复的核苷酸片段序列，这些重复序列被称为PCR duplicates。另外，在测序仪进行光学测量时候，也会形成一些光学重复，optical duplicates。如果变异位点位于这些重复的序列中，可能导致变异频率偏高，因此需要对重复序列进行标记，使得后续变异检测软件可以识别这些重复序列。
 
 我们使用GATK包含的MarkDuplicates功能模块进行重复序列标记。（该功能原属于Picard软件，后被GATK收录）
 
