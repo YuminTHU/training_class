@@ -38,7 +38,7 @@ perl /BioII/lulab_b/chenyinghui/software/annovar/annovar/annotate_variation.pl \
 refGene \ #下载的数据库名称
 /BioII/lulab_b/chenyinghui/database/Homo_sapiens/annovar  #下载数据库存放路径
 ```
-
+- [ANNOVAR的主页](http://annovar.openbioinformatics.org/en/latest/user-guide/download/)
 > 参考文献： **Wang K**, et al. [ANNOVAR: Functional annotation of genetic variants from next-generation sequencing data](http://nar.oxfordjournals.org/content/38/16/e164) _Nucleic Acids Research_. 2010. 38:e164.
 
 ### 2) Running steps
