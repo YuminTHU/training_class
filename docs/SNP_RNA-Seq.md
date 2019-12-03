@@ -169,6 +169,8 @@ ANNOVAR将注释分为gene-based annotation、filter-based annotation、Region-b
 
 可以用于ANNOVAR注释的公共数据库以及对应的注释类型可以参考[ANNOVAR的官网](http://annovar.openbioinformatics.org/en/latest/user-guide/download/)中的解释。
 
+下面脚本展示的是使用COSMIC、ExAC、ClinVAR数据库对变异进行注释的过程。另外，gnomAD与dbSNP也是常用的注释数据库，推荐大家今后可以尝试使用，但是由于这两个数据库文件偏大，所以在本示例中不做展示。
+
 ```bash
 echo 6.Annotation start `date`
 perl /BioII/lulab_b/chenyinghui/software/annovar/annovar/table_annovar.pl \
@@ -180,8 +182,8 @@ perl /BioII/lulab_b/chenyinghui/software/annovar/annovar/table_annovar.pl \
 --nastring . \  #注释空缺值用.代替
 --vcfinput \  #输入文件为VCF格式
 --thread 2 \
---protocol ensGene,cosmic70,gnomad211_genome,exac03,clinvar_20190305,avsnp150 \ #使用的数据库
---operation g,f,f,f,f,f \  #数据库对应的注释类型
+--protocol ensGene,cosmic70,exac03,clinvar_20190305 \ #使用的数据库
+--operation g,f,f,f \  #数据库对应的注释类型
 
 echo 6.Annotation end `date`
 ```
