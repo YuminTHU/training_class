@@ -53,7 +53,7 @@ source /BioII/lulab_b/containers/singularity/wrappers/bashrc
 STAR \
 --genomeDir /BioII/lulab_b/chenyinghui/project/Docker/SNP/reference/Homo_sapiens_GRCh38_ch1_STAR_Index \
 --runThreadN 1 \
---readFilesIn /BioII/lulab_b/chenyinghui/project/Docker/SNP/chr1.fq \ 
+--readFilesIn /BioII/lulab_b/chenyinghui/project/Docker/SNP/chr1.fq.gz \ 
 --readFilesCommand "gunzip -c" \
 --outSAMtype BAM SortedByCoordinate \
 --outSAMattrRGline ID:1 LB:exoRBase PL:ILLUMINA PU:unit1 SM:SRR5714908 \
