@@ -29,13 +29,14 @@ GATK是Broad Institute开发的一款用于检测变异（SNP/INDEL）的软件�
 本示例中使用ANNOVAR进行变异位点信息注释。ANNOVAR是一款优秀的变异注释软件，注释速度快，且可以免费使用。用户可以选择下载公共数据库进行注释，也可以用自己制作的数据库文件（ANNOVAR接受BED/VCF格式）进行注释。
 
 可以使用ANNOVAR提供的Perl脚本下载数据库，如下：
+（大家运行脚本前请将“#”注释内容删除，并且注意“\”后面不留空格，否则可能报错。）
 
 ```bash
 perl /BioII/lulab_b/chenyinghui/software/annovar/annovar/annotate_variation.pl \
 -buildver hg38 \
 -downdb \
 -webfrom annovar \
-refGene \ #下载的数据库名称
+refGene \#下载的数据库名称
 /BioII/lulab_b/chenyinghui/database/Homo_sapiens/annovar  #下载数据库存放路径
 ```
 - [ANNOVAR的主页](http://annovar.openbioinformatics.org/en/latest/user-guide/download/)
@@ -170,8 +171,6 @@ ANNOVAR将注释分为gene-based annotation、filter-based annotation、Region-b
 可以用于ANNOVAR注释的公共数据库以及对应的注释类型可以参考[ANNOVAR的官网](http://annovar.openbioinformatics.org/en/latest/user-guide/download/)中的解释。
 
 下面脚本展示的是使用COSMIC、ExAC、ClinVAR数据库对变异进行注释的过程。另外，gnomAD与dbSNP也是常用的注释数据库，推荐大家今后可以自行尝试使用。
-
-大家运行脚本前请将“#”注释内容删除，否则可能报错。
 
 ```bash
 #!/usr/bin/bash
