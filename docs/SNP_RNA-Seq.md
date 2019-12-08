@@ -191,11 +191,12 @@ perl /BioII/lulab_b/chenyinghui/software/annovar/annovar/table_annovar.pl \
 echo 6.Annotation end `date`
 ```
 
+
 运行上述脚本之后，最后在输出目录下会有三个文件，后缀名分别是：“.avinput”、“_multianno.txt”、“_multianno.vcf”。
 
-程序先将输入文件从vcf格式转换为“.avinput”格式，然后再对“.avinput”格式保存的变异进行注释，
+程序先将输入文件从vcf格式转换为“.avinput”格式，然后再对“.avinput”格式保存的变异进行注释。
 
-程序将注释之后的结果的以2种不同格式保存为“_multianno.txt”与“_multianno.vcf”。
+最后，程序将注释之后的结果的以2种不同格式保存为“_multianno.txt”与“_multianno.vcf”。
 
 “_multianno.txt”中各列以“tab”键分隔，将“_multianno.txt”后缀改为“_multianno.xls”即可在Windows系统中打开。
 
