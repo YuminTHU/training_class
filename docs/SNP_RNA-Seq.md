@@ -70,7 +70,7 @@ echo alignment end `date`
 ```bash
 echo 2.MarkDuplicates start `date`
 /BioII/lulab_b/chenyinghui/software/GATK/gatk-4.1.3.0/gatk  MarkDuplicates \
---java-options '-Xmx2G'
+--java-options '-Xmx2G' \
 --INPUT  /BioII/lulab_b/chenyinghui/project/Docker/SNP/output/1.STAR_alignment/SRR5714908.Aligned.sortedByCoord.out.bam \
 --OUTPUT /BioII/lulab_b/chenyinghui/project/Docker/SNP/output/2.MarkDuplicates/SRR5714908.sorted.MarkDup.bam \
 --CREATE_INDEX true \
@@ -89,7 +89,7 @@ SAM/BAM文件的第6列为CIGAR表达式，用来表示该序列各个位置的�
 echo 3.SplitNCigarReads start `date`
 
 /BioII/lulab_b/chenyinghui/software/GATK/gatk-4.1.3.0/gatk  SplitNCigarReads \
---java-options '-Xmx2G'
+--java-options '-Xmx2G' \
 -R /BioII/lulab_b/chenyinghui/project/Docker/SNP/reference/Homo_sapiens.GRCh38.ch1.faa \
 -I /BioII/lulab_b/chenyinghui/project/Docker/SNP/output/2.MarkDuplicates/SRR5714908.sorted.MarkDup.bam \
 -O /BioII/lulab_b/chenyinghui/project/Docker/SNP/output/3.SplitNCigarReads/SRR5714908.sorted.MarkDup.SplitNCigar.bam
