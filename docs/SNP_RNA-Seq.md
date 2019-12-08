@@ -170,6 +170,7 @@ ANNOVAR将注释分为gene-based annotation、filter-based annotation、Region-b
 可以用于ANNOVAR注释的公共数据库以及对应的注释类型可以参考[ANNOVAR的官网](http://annovar.openbioinformatics.org/en/latest/user-guide/download/)中的解释。
 
 下面脚本展示的是使用COSMIC、ExAC、ClinVAR数据库对变异进行注释的过程。另外，gnomAD与dbSNP也是常用的注释数据库，推荐大家今后可以自行尝试使用。
+
 大家运行脚本前请将“#”注释内容删除，否则可能报错。
 
 ```bash
@@ -191,7 +192,11 @@ echo 6.Annotation end `date`
 ```
 
 运行上述脚本之后，最后在输出目录下会有三个文件，后缀名分别是：“.avinput”、“_multianno.txt”、“_multianno.vcf”。
+
 程序先将输入文件从vcf格式转换为“.avinput”格式，然后再对“.avinput”格式保存的变异进行注释，
+
 程序将注释之后的结果的以2种不同格式保存为“_multianno.txt”与“_multianno.vcf”。
+
 “_multianno.txt”中各列以“tab”键分隔，将“_multianno.txt”后缀改为“_multianno.xls”即可在Windows系统中打开。
+
 “_multianno.vcf”则是以vcf格式保存变异以及注释信息。
