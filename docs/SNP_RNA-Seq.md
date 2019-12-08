@@ -170,20 +170,21 @@ ANNOVAR将注释分为gene-based annotation、filter-based annotation、Region-b
 可以用于ANNOVAR注释的公共数据库以及对应的注释类型可以参考[ANNOVAR的官网](http://annovar.openbioinformatics.org/en/latest/user-guide/download/)中的解释。
 
 下面脚本展示的是使用COSMIC、ExAC、ClinVAR数据库对变异进行注释的过程。另外，gnomAD与dbSNP也是常用的注释数据库，推荐大家今后可以自行尝试使用。
+大家运行脚本前请将“#”注释内容删除，否则可能报错。
 
 ```bash
 #!/usr/bin/bash
 echo 6.Annotation start `date`
 perl /BioII/lulab_b/chenyinghui/software/annovar/annovar/table_annovar.pl \
-/BioII/lulab_b/chenyinghui/project/Docker/SNP/output/5.VariantFiltration/SRR5714908.filtered.clean.vcf  \ #需要注释的VCF文件
-/BioII/lulab_b/chenyinghui/project/Docker/SNP/Annovar_database \ #注释使用的数据库所处的文件夹路径
---buildver hg38 \ #比对所用的人类参考基因组的版本，决定了变异坐标是基于何种版本参考基因组
---outfile /BioII/lulab_b/chenyinghui/project/Docker/SNP/output/6.Annotation/SRR5714908.annotated.variants \  #输出文件路径与文件名前缀
---remove \  #自动删除中间文件
---nastring . \  #注释空缺值用.代替
---vcfinput \  #输入文件为VCF格式
+/BioII/lulab_b/chenyinghui/project/Docker/SNP/output/5.VariantFiltration/SRR5714908.filtered.clean.vcf  \#需要注释的VCF文件
+/BioII/lulab_b/chenyinghui/project/Docker/SNP/Annovar_database \#注释使用的数据库所处的文件夹路径
+--buildver hg38 \#比对所用的人类参考基因组的版本，决定了变异坐标是基于何种版本参考基因组
+--outfile /BioII/lulab_b/chenyinghui/project/Docker/SNP/output/6.Annotation/SRR5714908.annotated.variants \#输出文件路径与文件名前缀
+--remove \#自动删除中间文件
+--nastring . \#注释空缺值用.代替
+--vcfinput \#输入文件为VCF格式
 --thread 2 \
---protocol ensGene,cosmic70,exac03,clinvar_20190305 \ #使用的数据库
+--protocol ensGene,cosmic70,exac03,clinvar_20190305 \#使用的数据库
 --operation g,f,f,f   #数据库对应的注释类型
 
 echo 6.Annotation end `date`
