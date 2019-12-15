@@ -65,11 +65,11 @@ docker run -v `pwd`:/data \ #将当前目录挂载为Docker的/data目录
 ```bash
 echo STAR start `date`
 source /BioII/lulab_b/containers/singularity/wrappers/bashrc
-/BioII/lulab_b/chenyinghui/software/STAR/STAR-2.7.3a/bin/Linux_x86_64/STAR \
- --runThreadN 2 \
- --genomeDir /BioII/lulab_b/chenyinghui/database/Homo_sapiens/GRCh38_STAR_index \
+/BioII/lulab_b/chenyinghui/software/STAR/STAR-2.7.3a/bin/Linux_x86_64_static/STAR \
+ --runThreadN 4 \
+ --genomeDir /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/ctat_genome_lib_build_X/ref_genome.fa.star.idx \
  --readFilesIn /Share2/home/lulab/zhuyumin/share/zhuyumin/test/docker/StarFusionOut/cutadapt/SRR5712523_1.fastq.gz  /Share2/home/lulab/zhuyumin/share/zhuyumin/test/docker/StarFusionOut/cutadapt/SRR5712523_2.fastq.gz \
- --outFileNamePrefix /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/SRR5712523/SRR5712523. \
+ --outFileNamePrefix /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/SRR5712523_X/SRR5712523. \
  --outReadsUnmapped None \
  --readFilesCommand "gunzip -c" \
  --outSAMstrandField intronMotif \
@@ -98,12 +98,20 @@ echo STAR end `date`
 
 ```bash
 echo starfusion start `date`
-
-docker run -v /BioII:/BioII -v /Share2:/Share2 --rm trinityctat/starfusion /usr/local/src/STAR-Fusion/STAR-Fusion \
+ctat-genome-lib-builder/util/rebuild_indices.pl .
+docker run -v /BioII:/BioII --rm trinityctat/starfusion /usr/local/src/STAR-Fusion/STAR-Fusion \
 --CPU 2 \
---genome_lib_dir /Share2/home/lulab/zhuyumin/share/zhuyumin/test/docker/StarFusionOut/ctat_genome_lib_build_dir \
--J /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/SRR5712523/SRR5712523.Chimeric.out.junction \
---output_dir /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/SRR5712523_fusion
+--genome_lib_dir /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/ctat_genome_lib_build_X_docker \
+-J /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/SRR5712523_X/SRR5712523.Chimeric.out.junction \
+--output_dir /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/SRR5712523_fusion_X_docker
+
 
 echo starfusion end `date`
+```
+如果运行STAR-Fusion时候有如下报错：
+ERROR, ctat genome lib: ctat_genome_lib_build_X does not validate and may require indices to be rebuilt.
+那么需要运行如下脚本，来重建index。因为STAR-Fusion的index在不同系统之间是不通用的，详见[该网址](https://github.com/STAR-Fusion/STAR-Fusion/wiki/rebuild_ctat_genome_lib_indices)
+
+```bash
+docker run -v /BioII:/BioII --rm trinityctat/starfusion /usr/local/src/STAR-Fusion/ctat-genome-lib-builder/util/rebuild_indices.pl /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/ctat_genome_lib_build_X_docker
 ```
