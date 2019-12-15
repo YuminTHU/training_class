@@ -67,7 +67,7 @@ echo STAR start `date`
 source /BioII/lulab_b/containers/singularity/wrappers/bashrc
 /BioII/lulab_b/chenyinghui/software/STAR/STAR-2.7.3a/bin/Linux_x86_64_static/STAR \
  --runThreadN 4 \
- --genomeDir /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/ctat_genome_lib_build_X/ref_genome.fa.star.idx \
+ --genomeDir /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/ctat_genome_lib_build_X_docker/ref_genome.fa.star.idx \
  --readFilesIn /Share2/home/lulab/zhuyumin/share/zhuyumin/test/docker/StarFusionOut/cutadapt/SRR5712523_1.fastq.gz  /Share2/home/lulab/zhuyumin/share/zhuyumin/test/docker/StarFusionOut/cutadapt/SRR5712523_2.fastq.gz \
  --outFileNamePrefix /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/SRR5712523_X/SRR5712523. \
  --outReadsUnmapped None \
@@ -98,7 +98,6 @@ echo STAR end `date`
 
 ```bash
 echo starfusion start `date`
-ctat-genome-lib-builder/util/rebuild_indices.pl .
 docker run -v /BioII:/BioII --rm trinityctat/starfusion /usr/local/src/STAR-Fusion/STAR-Fusion \
 --CPU 2 \
 --genome_lib_dir /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/ctat_genome_lib_build_X_docker \
