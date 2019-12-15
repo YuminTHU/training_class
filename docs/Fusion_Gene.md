@@ -109,7 +109,9 @@ docker run -v /BioII:/BioII --rm trinityctat/starfusion /usr/local/src/STAR-Fusi
 echo starfusion end `date`
 ```
 如果运行STAR-Fusion时候有如下报错：
+
 ERROR, ctat genome lib: ctat_genome_lib_build_X does not validate and may require indices to be rebuilt.
+
 那么需要运行如下脚本，来重建index。因为STAR-Fusion的index在不同系统之间是不通用的，详见[该网址](https://github.com/STAR-Fusion/STAR-Fusion/wiki/rebuild_ctat_genome_lib_indices)
 
 ```bash
