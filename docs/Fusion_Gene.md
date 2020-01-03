@@ -118,7 +118,7 @@ docker run -v /BioII:/BioII --rm trinityctat/starfusion /usr/local/src/STAR-Fusi
 ```
 ### 2) Results
 
-```bash
+```table
 #FusionName	JunctionReadCount	SpanningFragCount	SpliceType	LeftGene	LeftBreakpoint	RightGene	RightBreakpoint	LargeAnchorSupport	FFPM	LeftBreakDinuc	LeftBreakEntropy	RightBreakDinuc	RightBreakEntropy	annots
 CLIC2--AC234781.1	3	0	ONLY_REF_SPLICE	CLIC2^ENSG00000155962.13	chrX:155334371:-	AC234781.1^ENSG00000224216.1	chrX:155335249:-	YES_LDAS	0.1327	GT	1.8062	AG	1.8323	["INTRACHROMOSOMAL[chrX:0.00Mb]","LOCAL_REARRANGEMENT:-:[201]"]
 ARHGAP6--WWC3	3	0	ONLY_REF_SPLICE	ARHGAP6^ENSG00000047648.23	chrX:11427548:-	WWC3^ENSG00000047644.18	chrX:10063445:+	YES_LDAS	0.1327	GT	1.8892	AG	1.8295	["INTRACHROMOSOMAL[chrX:0.97Mb]"]
