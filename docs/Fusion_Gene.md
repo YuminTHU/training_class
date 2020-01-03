@@ -116,7 +116,7 @@ ERROR, ctat genome lib: ctat_genome_lib_build_X does not validate and may requir
 ```bash
 docker run -v /BioII:/BioII --rm trinityctat/starfusion /usr/local/src/STAR-Fusion/ctat-genome-lib-builder/util/rebuild_indices.pl /BioII/lulab_b/chenyinghui/project/Docker/STAR-Fusion/ctat_genome_lib_build_X_docker
 ```
-### 2) Results
+### 3) Results
 
 ```bash
 #FusionName	JunctionReadCount	SpanningFragCount	SpliceType	LeftGene	LeftBreakpoint	RightGene	RightBreakpoint	LargeAnchorSupport	FFPM	LeftBreakDinuc	LeftBreakEntropy	RightBreakDinuc	RightBreakEntropy	annots
