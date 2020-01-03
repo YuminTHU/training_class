@@ -123,8 +123,12 @@ docker run -v /BioII:/BioII --rm trinityctat/starfusion /usr/local/src/STAR-Fusi
 CLIC2--AC234781.1	3	0	ONLY_REF_SPLICE	CLIC2^ENSG00000155962.13	chrX:155334371:-	AC234781.1^ENSG00000224216.1	chrX:155335249:-	YES_LDAS	0.1327	GT	1.8062	AG	1.8323	["INTRACHROMOSOMAL[chrX:0.00Mb]","LOCAL_REARRANGEMENT:-:[201]"]
 ```
 
-"JunctionReads"列: 跨越融合位点(junction site)的reads数量   
-"SpanningFragCount"列: 对于某一成对的reads（mate pair），如果其中1条read完整地比对在融合位点上游的融合基因内，另一条read完整地比对在融合位点下游的融合基因内，则该成对的reads记为spanning mate pairs。该列表示spanning mate pairs数量。   
-根据融合断点的位置和reads的长度，有时可能会出现SpanningFragCount 等于0，所有反映融合事件的结果都以JunctionReads形式出现的情况。   
+__JunctionReads__: 跨越融合位点(junction site)的reads数量   
    
-"FFPM": 支持Chimeric RNA的reads数目取决于融合转录的表达量以及测序的reads数量。随着测序总体数据量的升高，测序导致的重复的Chimeric RNA的reads数量也会升高。因此，我们需要对支持融合事件的reads数量进行标准化，即 FFPM (fusion fragments per million total reads)。STAR-Fusion中默认的FFPM阈值为0.1，意味着在总reads为10M前提下，至少需要有1条read支持该Chimeric RNA。该默认参数可以有效过滤假阳性结果。如果需要更改FFPM过滤标准，可以在STAR-Fusion `--min_FFPM`参数中进行设置。
+__SpanningFragCount__: 对于某一成对的reads（mate pair），如果其中1条read完整地比对在融合位点上游的融合基因内，另一条read完整地比对在融合位点下游的融合基因内，则该成对的reads记为spanning fragments。SpanningFragCount表示spanning fragments数量。   
+根据融合断点的位置和reads的长度，有时可能会出现SpanningFragCount 等于0，所有反映融合事件的reads都以JunctionReads形式出现的情况。   
+   
+__FFPM__: 支持Chimeric RNA的reads数目取决于融合转录的表达量以及测序的reads数量。随着测序总体数据量的升高，测序导致的重复的Chimeric RNA的reads数量也会升高。因此，我们需要对支持融合事件的reads数量进行标准化，即 FFPM (fusion fragments per million total reads)。STAR-Fusion中默认的FFPM阈值为0.1，意味着在总reads为10M前提下，至少需要有1条read支持该Chimeric RNA。该默认参数可以有效过滤假阳性结果。如果需要更改FFPM过滤标准，可以在STAR-Fusion `--min_FFPM`参数中进行设置。
+   
+__LargeAnchorSupport__: 如果融合位点两侧25bp有junction reads覆盖，则记为"YES_LDAS"(LDAS = long double anchor support)。如果融合事件缺少LargeAnchorSupport以及spanning fragment支持，那么该Chimeric RNA结果很可能是假阳性。   
+   
